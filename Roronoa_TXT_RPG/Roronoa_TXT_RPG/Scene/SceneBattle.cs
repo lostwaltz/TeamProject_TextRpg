@@ -1,5 +1,4 @@
-﻿using Roronoa_TXT_RPG.Battle;
-using Roronoa_TXT_RPG.Monster;
+﻿using Roronoa_TXT_RPG.Monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace Roronoa_TXT_RPG
     internal class SceneBattle : Scene
     {
 
-
+        Battle battle = new Battle();
 
 
         //Battle이 일하는 곳
