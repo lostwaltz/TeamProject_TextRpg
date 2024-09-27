@@ -37,6 +37,9 @@ namespace Roronoa_TXT_RPG
                 case SCENE_TYPE.SCENE_BATTLE:
                     _curScene = new SceneBattle();
                     break;
+                case SCENE_TYPE.SCENE_QUEST:
+                    _curScene = new SceneQuest();
+                    break;
             }
         }
         
