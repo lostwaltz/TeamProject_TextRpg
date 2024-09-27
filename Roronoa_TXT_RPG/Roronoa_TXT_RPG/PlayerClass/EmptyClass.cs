@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Roronoa_TXT_RPG.PlayerClass
+namespace Roronoa_TXT_RPG
 {
     class Player
     {
