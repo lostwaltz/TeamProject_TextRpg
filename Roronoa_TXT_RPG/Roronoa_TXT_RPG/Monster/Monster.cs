@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roronoa_TXT_RPG.Monster
+namespace Roronoa_TXT_RPG
 {
     internal class Monster
     {

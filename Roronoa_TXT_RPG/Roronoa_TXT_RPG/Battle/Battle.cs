@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Roronoa_TXT_RPG
 {
     public class Battle
     {
 
-        public void Scene_SelectPlayerAction()
+        internal void Scene_SelectPlayerAction(List<Monster> monsters)
         {
+            Console.Clear();
             //Battle!!
             Console.WriteLine("Battle!!");
             Console.WriteLine("");
@@ -47,8 +51,9 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public void Scene_SelectAttackTarget()
+        internal void Scene_SelectAttackTarget(List<Monster> monsters)
         {
+            Console.Clear();
             //Battle!!
             Console.WriteLine("Battle!!");
             Console.WriteLine("");
@@ -82,19 +87,127 @@ namespace Roronoa_TXT_RPG
             Console.Write(">>");
         }
 
-        public void PlayerAttackResult()
+        internal void Scene_PlayerAttackResult(List<Monster> monsters, int targetMonster)
         {
+            Console.Clear();
+            int targetCurHP = monsters[targetMonster].CurHealth;
+            //Battle!!
+            Console.WriteLine("Battle!!");
+            Console.WriteLine("");
 
+            //Chad 의 공격!
+            //Lv.3 공허충 을(를) 맞췄습니다. [데미지: 10]
+            Console.WriteLine($"{player.name}의 공격!");
+            Console.WriteLine($"Lv{monsters[targetMonster].Name}을(를) 맞췄습니다. [데미지: {player.attackDamage}]");
+            monsters[targetMonster].CurHealth -= player.attackDamage;
+
+            //Lv.3 공허충
+            //HP 10->Dead
+            if (monsters[targetMonster].isDead)
+            {
+                Console.WriteLine($"Lv.{monsters[targetMonster].Level} {monsters[targetMonster].Name}");
+                Console.WriteLine($"HP {monsters[targetMonster].CurHealth} -> Dead");
+                Console.WriteLine("");
+            }
+            else
+            {
+                Console.WriteLine($"Lv.{monsters[targetMonster].Level} {monsters[targetMonster].Name}");
+                Console.WriteLine($"HP {targetCurHP} -> HP {monsters[targetMonster].CurHealth}");
+                Console.WriteLine("");
+            }
+
+            //0.다음
+            Console.WriteLine("0. 다음");
+            Console.WriteLine("");
+            //>>
+            Console.Write(">>");
         }
 
-        public void MonsterAttackResult()
-        {
 
+
+        public void Scene_MonsterAttackResult()
+        {
+            Console.Clear();
+            //Battle!!
+            Console.WriteLine("Battle!!");
+            Console.WriteLine("");
+
+            //Lv.2 미니언 의 공격!
+            //Chad 을(를) 맞췄습니다.  [데미지: 6]
+            Console.WriteLine($"Lv.{monster.level} {monster.name}의 공격!");
+            Console.WriteLine($"Lv.{player.level} {player.name}을(를) 맞췄습니다. [데미지: {monster.damage}]");
+
+            //Lv.1 Chad
+            //HP 100-> 94
+            Console.WriteLine($"Lv.{player.level} {player.name} ({player.job})");
+            Console.WriteLine($"{player.curHealth} -> {player.curHealth-monster.damage}");
+            Console.WriteLine("");
+
+            //0.다음
+            Console.WriteLine("0. 다음");
+            Console.WriteLine("");
+            //대상을 선택해주세요.
+            //>>
+            Console.WriteLine("대상을 선택해주세요.");
+            Console.Write(">>");
         }
 
-        public void BattleResult()
+        public void Scene_BattleResult(bool? isVictory, int beforeBattlePlayerHP,int monstersCount)
         {
+            Console.Clear();
+            if (isVictory == true)
+            {
+                //Battle!! - Result
+                Console.WriteLine("Battle!! - Result");
+                Console.WriteLine("");
 
+                //Victory
+                Console.WriteLine("Victory");
+                Console.WriteLine("");
+
+                //던전에서 몬스터 3마리를 잡았습니다.
+                Console.WriteLine($"던전에서 몬스터 {monstersCount}마리를 잡았습니다.");
+                Console.WriteLine("");
+
+                //Lv.1 Chad
+                //HP 100-> 74
+                Console.WriteLine($"Lv.{player.level} {player.name} ({player.job})");
+                Console.WriteLine($"{beforeBattlePlayerHP} -> {player.curHealth}");
+                Console.WriteLine("");
+
+                //0.다음
+                Console.WriteLine("0. 다음");
+                Console.WriteLine("");
+                //>>
+                Console.Write(">>");
+
+            }
+            else if (isVictory == false)
+            {
+                //Battle!! - Result
+                Console.WriteLine("Battle!! - Result");
+                Console.WriteLine("");
+
+                //You Lose
+                Console.WriteLine("You Lose");
+                Console.WriteLine("");
+
+                //Lv.1 Chad
+                //HP 100-> 0
+                Console.WriteLine($"Lv.{player.level} {player.name} ({player.job})");
+                Console.WriteLine($"{beforePlayerHP} -> 0");
+                Console.WriteLine("");
+
+                //0.다음
+                Console.WriteLine("0. 다음");
+                Console.WriteLine("");
+                //>>
+                Console.Write(">>");
+            }
+            else
+            {
+                Console.WriteLine("? 이건 뭐야 미친 오류다 ㄷㄷ 여기 어떻게 왔어");
+            }
         }
 
 
