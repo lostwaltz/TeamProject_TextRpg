@@ -1,4 +1,4 @@
-﻿using Roronoa_TXT_RPG.Event;
+﻿using Roronoa_TXT_RPG;
 
 namespace Roronoa_TXT_RPG
 {

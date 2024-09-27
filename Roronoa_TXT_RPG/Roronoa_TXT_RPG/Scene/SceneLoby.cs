@@ -1,10 +1,10 @@
-﻿using Roronoa_TXT_RPG.Event;
+﻿using Roronoa_TXT_RPG;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Roronoa_TXT_RPG.Event.MonsterKillEventArgs;
+using static Roronoa_TXT_RPG.MonsterKillEventArgs;
 
 namespace Roronoa_TXT_RPG
 {
