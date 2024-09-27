@@ -4,16 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Roronoa_TXT_RPG.Battle
+namespace Roronoa_TXT_RPG
 {
-    internal class Battle
+    public class Battle
     {
 
-        public void PlayBattle()
+        public void PlayerActionSelect()
         {
 
         }
 
-       
+        public void SelectAttackTarget()
+        {
+
+        }
+
+        public void PlayerAttackResult()
+        {
+
+        }
+
+        public void MonsterAttackResult()
+        {
+
+        }
+
+        public void BattleResult()
+        {
+
+        }
+
+
+
     }
 }

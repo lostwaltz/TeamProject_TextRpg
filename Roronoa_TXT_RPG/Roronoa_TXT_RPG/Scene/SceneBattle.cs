@@ -21,7 +21,13 @@ namespace Roronoa_TXT_RPG
         //Battle이 일하는 곳
         public override void SceneUpdate()
         {
-            Console.WriteLine("Battle");
+            
+
+
+
+            Program.KeyInputCheck(out int number, 10);
+
+
         }
     }
 }
