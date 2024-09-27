@@ -14,6 +14,14 @@ namespace Roronoa_TXT_RPG.Battle
         //적의 턴
         //적의 공격
 
+        public void PlayBattle()
+        {
+            while(true)
+            {
+
+            }
+        }
+
 
         //몬스터들과 캐릭터의 정보 필요
         public override void SceneUpdate()
