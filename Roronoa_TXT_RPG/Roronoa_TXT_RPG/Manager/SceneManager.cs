@@ -11,7 +11,7 @@ namespace Roronoa_TXT_RPG
 {
     class SceneManager
     {
-        public static SceneManager? instance;
+        public static SceneManager? instance { get; private set; }
 
         private Scene? _curScene;
 

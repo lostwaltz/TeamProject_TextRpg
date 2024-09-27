@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Roronoa_TXT_RPG.Event;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Roronoa_TXT_RPG.Event.MonsterKillEventArgs;
 
 namespace Roronoa_TXT_RPG
 {
@@ -16,6 +18,14 @@ namespace Roronoa_TXT_RPG
                 "1. 상태 보기\n" +
                 "2. 전투 시작\n\n" +
                 "원하시는 행동을 입력해주세요.\n>> ");
+
+            
+            EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterKillEventArgs args) => { Console.WriteLine("죽은 몬스터 타입 : " + args.MonsterType ); } );
+            EventManager.instance?.Subscribe<MonsterDamageEventArgs>((MonsterDamageEventArgs args) => { Console.WriteLine("몬스터 데미지 : " + args.MonsterDamage); });
+
+            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MonsterEventType.GOBLIN));
+            EventManager.instance?.Publish<MonsterDamageEventArgs>(new MonsterDamageEventArgs(10));
+
 
             Program.KeyInputCheck(out int number, 10);
 
