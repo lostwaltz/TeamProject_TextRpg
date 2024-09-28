@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Roronoa_TXT_RPG.MonsterKillEventArgs;
 using static Roronoa_TXT_RPG.Quest;
 
 namespace Roronoa_TXT_RPG
@@ -15,10 +16,6 @@ namespace Roronoa_TXT_RPG
 
     public class Quest : IRenderReward
     {
-        public Quest(QuestStruct inputQuestData)
-        {
-            QuestData = inputQuestData;
-        }
         public Quest(string presetName)
         {
             CreateQuestPreset(presetName);
@@ -34,6 +31,8 @@ namespace Roronoa_TXT_RPG
 
             public List<IReward> IRewardList;
         }
+        
+
         public QuestStruct QuestData { get; private set; }
 
         public void RenderReward()
@@ -75,19 +74,39 @@ namespace Roronoa_TXT_RPG
                     itemList.Add(new Item("낡은 검"));
 
                     tempData.IRewardList.Add(new RewardItem(itemList));
+
+                    EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterType) =>
+                    {
+                        if (MonsterEventType.GOBLIN == MonsterType.MonsterType)
+                        {
+                            QuestStruct tempData = QuestData;
+                            tempData.CurValue += 1;
+                            QuestData = tempData;
+                        }
+                    });
                     break;
                 case "장비를 장착 해보기":
                     tempData.Title = new StringBuilder(presetName);
                     tempData.Story = new StringBuilder("검을 쥐는법을 아는가?");
                     tempData.Progress = new StringBuilder("- 장비 장착");
 
-                    tempData.CurValue = 5;
+                    tempData.CurValue = 0;
                     tempData.TargetValue = 5;
 
                     tempData.IRewardList = new List<IReward>();
                     itemList.Add(new Item("청동 도끼"));
 
                     tempData.IRewardList.Add(new RewardItem(itemList));
+
+                    EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterType) =>
+                    {
+                        if (MonsterEventType.GOBLIN == MonsterType.MonsterType)
+                        {
+                            QuestStruct tempData = QuestData;
+                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                            QuestData = tempData;
+                        }
+                    });
                     break;
             }
 

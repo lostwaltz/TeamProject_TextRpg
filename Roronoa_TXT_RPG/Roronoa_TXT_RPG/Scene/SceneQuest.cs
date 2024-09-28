@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Roronoa_TXT_RPG.MonsterKillEventArgs;
 
 namespace Roronoa_TXT_RPG
 {
@@ -19,6 +20,8 @@ namespace Roronoa_TXT_RPG
 
             QuestManager.instance.ShowQuestList();
 
+            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MonsterEventType.GOBLIN));
+
             Console.Write("0. 나가기\n\n원하시는 퀘스트를 선택해주세요.\n" + ">> ");
 
             if (false == Program.KeyInputCheck(out int selectNumber, QuestManager.instance.GetQuestCount()))
@@ -32,7 +35,6 @@ namespace Roronoa_TXT_RPG
 
             Console.Clear();
             QuestManager.instance.ShowQuestInfo(questIndex);
-
             QuestManager.instance.SelectionProgress(questIndex);
         }
     }
