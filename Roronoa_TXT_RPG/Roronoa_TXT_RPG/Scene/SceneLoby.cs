@@ -19,7 +19,6 @@ namespace Roronoa_TXT_RPG
                 "2. 전투 시작\n\n" +
                 "원하시는 행동을 입력해주세요.\n>> ");
 
-
             Program.KeyInputCheck(out int number, 10);
 
             switch ((SCENE_TYPE)number)

@@ -21,6 +21,7 @@ namespace Roronoa_TXT_RPG
         {
             SceneManager.InitSceneManager();
             EventManager.InitEventManager();
+            QuestManager.InitQuestManager();
         }
         static void Update()
         {

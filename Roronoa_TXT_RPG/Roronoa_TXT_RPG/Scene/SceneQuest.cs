@@ -6,19 +6,34 @@ using System.Threading.Tasks;
 
 namespace Roronoa_TXT_RPG
 {
+   
+
     internal class SceneQuest : Scene
     {
+        private List<int> _questIndexList = new List<int>();
+
         public override void SceneUpdate()
         {
-            Console.Write(
-                "Quest!!\n\n" +
-                "1. 마을을 위협하는 미니언 처치\n" +
-                "2. 장비를 장착해보자\n" +
-                "3. 더욱 더 강해지기!\n\n\n" +
-                "원하시는 퀘스트를 선택해주세요.\n" +
-                ">>");
+            if (null == QuestManager.instance)
+                return;
 
-            Program.KeyInputCheck(out int selectNumber, 10);
+            QuestManager.instance.ShowQuestList();
+
+            Console.Write("0. 나가기\n\n원하시는 퀘스트를 선택해주세요.\n" + ">> ");
+
+            if (false == Program.KeyInputCheck(out int selectNumber, QuestManager.instance.GetQuestCount()))
+                return;
+            if (0 == selectNumber)
+            {
+                SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
+                return;
+            }
+            int questIndex = selectNumber - 1;
+
+            Console.Clear();
+            QuestManager.instance.ShowQuestInfo(questIndex);
+
+            QuestManager.instance.SelectionProgress(questIndex);
         }
     }
 }
