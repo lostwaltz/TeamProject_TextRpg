@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace Roronoa_TXT_RPG
 {
-    public enum RewardTypeEnum
-    {
-        ITEM, STAT, END
-    }
-
     public interface IReward
     {
         void GiveReward(IDummyPlayerInterface playerInterface);
@@ -28,7 +23,8 @@ namespace Roronoa_TXT_RPG
                 {
                     rewardItem[itemName] = new List<Item> { inputItemList[i] };
                 }
-                rewardItem[itemName].Add(inputItemList[i]);
+                else
+                    rewardItem[itemName].Add(inputItemList[i]);
             }
         }
         Dictionary<string, List<Item>> rewardItem = new Dictionary<string, List<Item>>();

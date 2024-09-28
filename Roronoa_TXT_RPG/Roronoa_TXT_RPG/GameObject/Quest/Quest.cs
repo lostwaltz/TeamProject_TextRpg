@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Roronoa_TXT_RPG.GameObject;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -73,14 +74,16 @@ namespace Roronoa_TXT_RPG
                     tempData.IRewardList = new List<IReward>();
                     itemList.Add(new Item("낡은 검"));
 
-                    tempData.IRewardList.Add(new RewardItem(itemList));
+                    IReward? iReward = new RewardFactory().CreateReward(itemList);
+                    if(null != iReward)
+                        tempData.IRewardList.Add(iReward);
 
                     EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterType) =>
                     {
-                        if (MonsterEventType.GOBLIN == MonsterType.MonsterType)
+                        if (MonsterEventType.END == MonsterType.MonsterType)
                         {
                             QuestStruct tempData = QuestData;
-                            tempData.CurValue += 1;
+                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
                             QuestData = tempData;
                         }
                     });
@@ -94,6 +97,7 @@ namespace Roronoa_TXT_RPG
                     tempData.TargetValue = 5;
 
                     tempData.IRewardList = new List<IReward>();
+                    itemList.Add(new Item("청동 도끼"));
                     itemList.Add(new Item("청동 도끼"));
 
                     tempData.IRewardList.Add(new RewardItem(itemList));

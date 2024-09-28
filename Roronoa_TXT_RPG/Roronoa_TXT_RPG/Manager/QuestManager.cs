@@ -63,7 +63,7 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine(questData.Story + "\n");
             Console.WriteLine(questData.Progress + " (" + questData.CurValue + "/" + questData.TargetValue + ")");
 
-            Console.WriteLine("\n- 보상 -\n");
+            Console.WriteLine("\n- 보상 -");
 
             PrintQuestReward(index);
         }
@@ -77,7 +77,7 @@ namespace Roronoa_TXT_RPG
 
             if (false == pair.isSelect)
             {
-                Console.Write("1.수락\n0.돌아가기\n>> ");
+                Console.Write("\n1.수락\n0.돌아가기\n>> ");
                 Program.KeyInputCheck(out int selectNumber, 1);
 
                 if (1 == selectNumber)
@@ -89,7 +89,7 @@ namespace Roronoa_TXT_RPG
             {
                 if(true == pair.quest.GetIsGoal())
                 {
-                    Console.Write("1.보상받기\n0.돌아가기\n>> ");
+                    Console.Write("\n1.보상받기\n0.돌아가기\n>> ");
                     Program.KeyInputCheck(out int selectNumber, 1);
 
                     if(1 == selectNumber)
@@ -103,7 +103,7 @@ namespace Roronoa_TXT_RPG
                 }
                 else if(false == pair.quest.GetIsGoal())
                 {
-                    Console.Write("아무 키로 돌아가기\n>> ");
+                    Console.Write("\n아무 키로 돌아가기\n>> ");
                     Console.ReadLine();
                     return;
                 }
