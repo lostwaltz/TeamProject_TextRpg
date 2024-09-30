@@ -74,7 +74,7 @@ namespace Roronoa_TXT_RPG
             //HP 100 / 100
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{player.level} {player.name} ({player.job})");
-            Console.WriteLine($"{player.curHealth}/{player.maxHealth}");
+            Console.WriteLine($"HP {player.curHealth}/{player.maxHealth}");
             Console.WriteLine("");
 
             //0.취소
