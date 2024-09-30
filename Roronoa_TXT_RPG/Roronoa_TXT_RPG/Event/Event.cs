@@ -14,7 +14,7 @@ namespace Roronoa_TXT_RPG
         {
             MonsterType = monsterType;
         }
-
+        
         public MonsterEventType MonsterType { get; set; }
     }
 
