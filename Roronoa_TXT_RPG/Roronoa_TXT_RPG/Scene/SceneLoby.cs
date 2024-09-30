@@ -16,7 +16,8 @@ namespace Roronoa_TXT_RPG
                 "스파르타 던전에 오신 여러분 환영합니다.\n" +
                 "이제 전투를 시작할 수 있습니다.\n\n" +
                 "1. 상태 보기\n" +
-                "2. 전투 시작\n\n" +
+                "2. 전투 시작\n" +
+                "3. 퀘스트 보기\n\n" +
                 "원하시는 행동을 입력해주세요.\n>> ");
 
             Program.KeyInputCheck(out int number, 10);
