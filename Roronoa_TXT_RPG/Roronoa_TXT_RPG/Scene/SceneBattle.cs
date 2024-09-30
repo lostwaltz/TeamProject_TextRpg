@@ -33,13 +33,11 @@ namespace Roronoa_TXT_RPG
         public override void SceneUpdate()
         {
             //선택num
-            int _selectPlayerAction=0;
-            int _selectAttackTarget=0;
-            int _selectNext = 0;
+            Queue<int> selectQueue = new Queue<int>();
             List<Monster> monsters = new List<Monster>();
 
             //플레이어행동선택Scene
-            _battle.Scene_SelectPlayerAction(monsters);
+            _selectPlayerAction = _battle.Scene_SelectPlayerAction();
             //플레이어 선택
             Program.KeyInputCheck(out _selectPlayerAction, _playerActionCount);
             switch (_selectPlayerAction)
@@ -48,7 +46,7 @@ namespace Roronoa_TXT_RPG
                     break;
                 case 1://공격
                     //공격대상선택Scene
-                    _battle.Scene_SelectAttackTarget(monsters);
+                    _battle.Scene_SelectAttackTarget();
                     //공격대상 선택
                     Program.KeyInputCheck(out _selectAttackTarget, _attackTargetCount);
                     break;
@@ -60,7 +58,7 @@ namespace Roronoa_TXT_RPG
             if (_selectAttackTarget != 0)
             {
                 //플레이어공격결과Scene
-                _battle.Scene_PlayerAttackResult(monsters, _selectAttackTarget);
+                _battle.Scene_PlayerAttackResult(_selectAttackTarget);
                 //플레이어 선택
                 Program.KeyInputCheck(out _selectNext, _nextCount);
 
@@ -88,7 +86,7 @@ namespace Roronoa_TXT_RPG
                 else//if (isVictory != null) ==전투결과Scene
                 {
                     //전투결과Scene (승리, 패배 둘 다 여기 있음)
-                    _battle.Scene_BattleResult(isVictory, beforeBattlePlayerHP, monsters.Count);
+                    _battle.Scene_BattleResult(isVictory, beforeBattlePlayerHP);
                     //플레이어 선택
                     Program.KeyInputCheck(out _selectNext, _nextCount);
                 }

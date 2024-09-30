@@ -13,8 +13,12 @@ namespace Roronoa_TXT_RPG
 {
     public class Battle
     {
+        //배틀중: null, true: 승리, false: 패배
+        bool? isVictory = null;
+        List<Monster> monsters = new List<Monster>();
+        int monsterDeadCount = 0; //죽인 몬스터 수
 
-        internal void Scene_SelectPlayerAction(List<Monster> monsters)
+        internal int Scene_SelectPlayerAction()
         {
             Console.Clear();
             //Battle!!
@@ -44,14 +48,14 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine("");
 
             //원하시는 행동을 입력해주세요.
-            //>>
+            //>>플레이어 선택지 제공 함수
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-
+            return 0;
         }
 
-        internal void Scene_SelectAttackTarget(List<Monster> monsters)
+        internal int Scene_SelectAttackTarget(int playerSelectNum)
         {
             Console.Clear();
             //Battle!!
@@ -85,9 +89,11 @@ namespace Roronoa_TXT_RPG
             //>>
             Console.WriteLine("대상을 선택해주세요.");
             Console.Write(">>");
+
+            return 0;
         }
 
-        internal void Scene_PlayerAttackResult(List<Monster> monsters, int targetMonster)
+        internal void Scene_PlayerAttackResult(int targetMonster)
         {
             Console.Clear();
             int targetCurHP = monsters[targetMonster].CurHealth;
@@ -121,6 +127,18 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine("");
             //>>
             Console.Write(">>");
+
+
+            //몬스터를 전부 죽였으면 win, 아니면 몬스터Phase
+            foreach (Monster monster in monsters)
+            {
+                if (monster.isDead)
+                    monsterDeadCount++;
+            }
+            if (monsterDeadCount == monsters.Count)
+            {
+                isVictory = true;
+            }
         }
 
 
@@ -152,7 +170,7 @@ namespace Roronoa_TXT_RPG
             Console.Write(">>");
         }
 
-        public void Scene_BattleResult(bool? isVictory, int beforeBattlePlayerHP,int monstersCount)
+        public void Scene_BattleResult(bool? isVictory, int beforeBattlePlayerHP)
         {
             Console.Clear();
             if (isVictory == true)
@@ -166,7 +184,7 @@ namespace Roronoa_TXT_RPG
                 Console.WriteLine("");
 
                 //던전에서 몬스터 3마리를 잡았습니다.
-                Console.WriteLine($"던전에서 몬스터 {monstersCount}마리를 잡았습니다.");
+                Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.");
                 Console.WriteLine("");
 
                 //Lv.1 Chad
@@ -195,7 +213,7 @@ namespace Roronoa_TXT_RPG
                 //Lv.1 Chad
                 //HP 100-> 0
                 Console.WriteLine($"Lv.{player.level} {player.name} ({player.job})");
-                Console.WriteLine($"{beforePlayerHP} -> 0");
+                Console.WriteLine($"{beforeBattlePlayerHP} -> 0");
                 Console.WriteLine("");
 
                 //0.다음
