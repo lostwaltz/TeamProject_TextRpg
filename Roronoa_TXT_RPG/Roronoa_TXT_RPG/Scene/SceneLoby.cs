@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Roronoa_TXT_RPG;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Roronoa_TXT_RPG.MonsterKillEventArgs;
 
 namespace Roronoa_TXT_RPG
 {
@@ -19,13 +21,16 @@ namespace Roronoa_TXT_RPG
 
             Program.KeyInputCheck(out int number, 10);
 
-            switch (number)
+            switch ((SCENE_TYPE)number)
             {
-                case 1:
+                case SCENE_TYPE.SCENE_STATUS:
                     SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_STATUS);
                     break;
-                case 2:
+                case SCENE_TYPE.SCENE_BATTLE:
                     SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_BATTLE);
+                    break;
+                case SCENE_TYPE.SCENE_QUEST:
+                    SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_QUEST);
                     break;
             }
         }

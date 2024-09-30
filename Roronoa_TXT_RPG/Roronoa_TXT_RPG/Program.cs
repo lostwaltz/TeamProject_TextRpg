@@ -1,4 +1,6 @@
-﻿namespace Roronoa_TXT_RPG
+﻿using Roronoa_TXT_RPG;
+
+namespace Roronoa_TXT_RPG
 {
     internal class Program
     {
@@ -18,6 +20,8 @@
         static void Init()
         {
             SceneManager.InitSceneManager();
+            EventManager.InitEventManager();
+            QuestManager.InitQuestManager();
         }
         static void Update()
         {
