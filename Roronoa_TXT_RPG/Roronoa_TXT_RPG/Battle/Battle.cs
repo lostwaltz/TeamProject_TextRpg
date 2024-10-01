@@ -86,7 +86,7 @@ namespace Roronoa_TXT_RPG
             {
                 int selectNumber = i + 1;
                 Console.Write($"{selectNumber} ");
-                monsters.PrintCharactorInfo();
+                monsters[i].PrintCharactorInfo();
             }
             Console.WriteLine("");
             Console.WriteLine("");
