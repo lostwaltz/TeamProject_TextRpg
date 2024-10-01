@@ -2,7 +2,7 @@
 namespace Roronoa_TXT_RPG
 {
     internal class Character
-    {
+	{
         protected int level { get; set; }
         protected string name { get; set; }
         protected string job { get; set; }
