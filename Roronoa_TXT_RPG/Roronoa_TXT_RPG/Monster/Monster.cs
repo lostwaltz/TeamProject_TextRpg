@@ -24,9 +24,10 @@ namespace Roronoa_TXT_RPG
 
         public override void PrintCharactorInfo() //몬스터 정보 출력 함수
         {
-            Lv. { 레벨}
-            { 이름}
-            HP { 현재 체력} //MP {마나} (마나가 있다면)	
+            Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
+
+
+            //MP {마나} (마나가 있다면)	
         }
 
         public void Attack()//기본공격
@@ -39,9 +40,17 @@ namespace Roronoa_TXT_RPG
             AttackOpponent(SkillPower);
         }
         */
-    }
-    internal class Goblin : Monster
-    {
-
+        internal class Goblin : Monster
+        {
+            public void Randomstatus()
+            {
+                Random random = new Random();
+                for (int i = 0; i < 10; i++)
+                {
+                    int randomValue = random.Next(30, 50);
+                    Console.WriteLine(randomValue);
+                }
+            }
+        }
     }
 }

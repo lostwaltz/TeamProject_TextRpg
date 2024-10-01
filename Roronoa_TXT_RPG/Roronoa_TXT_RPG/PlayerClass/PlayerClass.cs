@@ -12,7 +12,7 @@ using static Roronoa_TXT_RPG.Program;
 namespace Roronoa_TXT_RPG
 {
     
-    public class Player : Character
+    internal class Player : Character
     {
         int level = 1;
         string name;

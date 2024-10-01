@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Roronoa_TXT_RPG
 {
-	public class Character
+	internal class Character
 	{
         int level;
         string name;
