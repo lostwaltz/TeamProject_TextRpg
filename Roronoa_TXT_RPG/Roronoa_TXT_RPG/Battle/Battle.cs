@@ -32,13 +32,13 @@ namespace Roronoa_TXT_RPG
         {
             isVictory = null;
             _monsterDeadCount = 0;
-            _beforeBattlePlayerHP = player.CurHealthPoint;
+            _beforeBattlePlayerHP = Program.player.curHealthPoint;
         }
 
 
         //완료
         //나오는 선택 => 플레이어 행동: 1.공격, 2. 스킬...(0없음)
-        internal void Scene_SelectPlayerAction()
+        internal void SceneSelectPlayerAction()
         {
             Console.Clear();
             //Battle!!
@@ -50,7 +50,7 @@ namespace Roronoa_TXT_RPG
             //LV.3 공허충 HP 10
             for (int i = 0; i < monsters.Count; i++)
             {
-                monsters.PrintCharactorInfo();
+                monsters[i].PrintCharactorInfo();
             }
             Console.WriteLine("");
             Console.WriteLine("");
@@ -58,21 +58,21 @@ namespace Roronoa_TXT_RPG
             //[내정보]
             //Lv.1  Chad(전사)
             //HP 100 / 100
-            player.PrintCharactorInfo();
+            Program.player.PrintCharactorInfo();
             Console.WriteLine("");
 
             //1. 공격 
             //2. ...
             //원하시는 행동을 입력해주세요.
             //>>
-            player.BattlePlayerSelect(selectQueue);
+            Program.player.BattlePlayerSelect(selectQueue);
 
         }
 
 
         //완료
         //나오는 선택 => 공격할 몬스터 선택: 1 고블린, 2 오크...(0. 취소)
-        internal void Scene_SelectAttackTarget()
+        internal void SceneSelectAttackTarget()
         {
             Console.Clear();
             //Battle!!
@@ -94,7 +94,7 @@ namespace Roronoa_TXT_RPG
             //[내정보]
             //Lv.1  Chad(전사)
             //HP 100 / 100
-            player.PrintCharactorInfo();
+            Program.player.PrintCharactorInfo();
             Console.WriteLine("");
 
             //0.취소
@@ -113,7 +113,7 @@ namespace Roronoa_TXT_RPG
 
         //완료
         //나오는 선택 => 다음으로 넘어가기: 0. 다음...
-        internal void Scene_PlayerAttackResult()
+        internal void ScenePlayerAttackResult()
         {
             Console.Clear();
             //Battle!!
@@ -152,7 +152,7 @@ namespace Roronoa_TXT_RPG
 
         //완료
         //나오는 선택 => 다음으로 넘어가기: 0. 다음...
-        public void Scene_MonsterAttackResult()
+        public void SceneMonsterAttackResult()
         {
             Console.Clear();
             //Battle!!
@@ -172,11 +172,11 @@ namespace Roronoa_TXT_RPG
                 {
                     //몬스터 공격 구현부
                     //만약 몬스터 스킬이 생기면 몬스터 클래스에 공격 메커니즘을 만들어야 할 듯하다.
-                    monster.AttackOpponent(player, monster.AttackPower);
+                    monster.Attack(Program.player);
                 }
             }
 
-            if (player.isDead)
+            if (Program.player.isDead)
             {
                 isVictory = false;
             }
@@ -195,7 +195,7 @@ namespace Roronoa_TXT_RPG
         //완료
         //게임결과Scene 게임이 끝났다면 0(0. 다음)이 Queue에 담겨서 반환된다.
         //TryDequeue를 이용해 전투결과가 실행되었는지 확인할 수 있다.
-        public void Scene_BattleResult()
+        public void SceneIsBattleResult()
         {
             Console.Clear();
             if (isVictory == true)
@@ -214,7 +214,7 @@ namespace Roronoa_TXT_RPG
 
                 //Lv.1 Chad
                 //HP 100-> 74
-                player.PrintCharactorInfo(_beforeBattlePlayerHP);
+                Program.player.PrintCharactorInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
 
                 //0.다음
@@ -239,7 +239,7 @@ namespace Roronoa_TXT_RPG
 
                 //Lv.1 Chad
                 //HP 100-> 0
-                player.PrintCharactorInfo(_beforeBattlePlayerHP);
+                Program.player.PrintCharactorInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
 
                 //0.다음
