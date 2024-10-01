@@ -1,24 +1,24 @@
 ﻿using System;
 namespace Roronoa_TXT_RPG
 {
-	public class Character
+    internal class Character
 	{
-        int level;
-        string name;
-        string job;
-        int attackPower;
-        int defense;
-        int maxHealthPoint;
-        int curHealthPoint;
-        int maxmanaPoint;
-        int curManaPoint;
-        int gold;
-        bool isDead => curHealthPoint <= 0;
+        protected int level { get; set; }
+        protected string name { get; set; }
+        protected string job { get; set; }
+        protected int attackPower { get; set; }
+        protected int defense { get; set; }
+        protected int maxHealthPoint { get; set; }
+        protected int curHealthPoint { get; set; }
+        protected int maxManaPoint { get; set; }
+        protected int curManaPoint { get; set; }
+        protected int gold { get; set; }
+        protected bool isDead => curHealthPoint <= 0;
 
         public int TakeDamage(int damage)
         {
-            int takeDamageHealthPoint = curHealthPoint - damage;
-            if(takeDamageHealthPoint < 0)
+            int _takeDamageHealthPoint = curHealthPoint - damage;
+            if(_takeDamageHealthPoint < 0)
             {
                 Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {takeDamageHealthPoint}");
             }
@@ -26,7 +26,7 @@ namespace Roronoa_TXT_RPG
             {
                 Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {takeDamageHealthPoint}");
             }
-            curHealthPoint = takeDamageHealthPoint;
+            curHealthPoint = _takeDamageHealthPoint;
             return curHealthPoint;
         }
 
@@ -34,6 +34,13 @@ namespace Roronoa_TXT_RPG
         {
             Console.WriteLine($"{name}의 공격!");
             Console.WriteLine($"{opponent}을(를) 공격했습니다. [데미지: {damage}]");
+
+            opponent.TakeDamage(damage);
+        }
+
+        public virtual void PrintCharactorInfo()    
+        {
+
         }
 
         public virtual void PrintCharaterInfo(int befireBattlePlayerHealthPoint)
