@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 enum BATTLE_SCENE_TYPE { PLAYER_ACTION, PLAYER_ATTACK_ACTION, ENEMY_PHASE, BATTLE_RESULT}
-
+enum PLAYER_ACTION { ATTACK = 1 }
 
 namespace Roronoa_TXT_RPG
 {
@@ -16,86 +16,53 @@ namespace Roronoa_TXT_RPG
     {
 
         Battle _battle = new Battle();
-
-        //배틀중: null, true: 승리, false: 패배
-        bool? isVictory = null;
-
-
-        //선택지 최대 개수 설정
-        int _playerActionCount = 2;
-        int _attackTargetCount = 4;
-        int _nextCount = 1;
-
-        //전투 시작 전 HP 저장
-        int beforeBattlePlayerHP = player.Health;
+        int selectNum = 0;
+        int selectBattleEnd = -1;
+        Queue<int> selectQueue = new Queue<int>();
 
         //Battle이 시작됐을 때 메인
         public override void SceneUpdate()
         {
-            //선택num
-            Queue<int> selectQueue = new Queue<int>();
-            List<Monster> monsters = new List<Monster>();
+            
+            _battle.Scene_SelectPlayerAction();
 
-            //플레이어행동선택Scene
-            _selectPlayerAction = _battle.Scene_SelectPlayerAction();
-            //플레이어 선택
-            Program.KeyInputCheck(out _selectPlayerAction, _playerActionCount);
-            switch (_selectPlayerAction)
-            {
-                case 0://없음
-                    break;
-                case 1://공격
-                    //공격대상선택Scene
-                    _battle.Scene_SelectAttackTarget();
-                    //공격대상 선택
-                    Program.KeyInputCheck(out _selectAttackTarget, _attackTargetCount);
-                    break;
-                case 2://선택안됨
-                    break;
-            }
+            _battle.Scene_SelectAttackTarget();
 
-            //0일 땐 플레이어 행동선택Scene으로 돌아간다
-            if (_selectAttackTarget != 0)
-            {
-                //플레이어공격결과Scene
-                _battle.Scene_PlayerAttackResult(_selectAttackTarget);
-                //플레이어 선택
-                Program.KeyInputCheck(out _selectNext, _nextCount);
+            //마지막 선택이 0(0. 취소)일 때, 맨 처음으로 돌아가기
+            
+            if (_battle.LastSelect() != 0)
+            {//>>속행
 
-                //몬스터를 전부 죽였는지? win : 몬스터Phase
-                int monsterDeadCount = 0;
-                foreach (Monster monster in monsters)
-                {
-                    if(monster.isDead)
-                        monsterDeadCount++;
-                }
-                if (monsterDeadCount == monsters.Count)
-                {
-                    isVictory = true;
-                }
-                    
-                //win이면 몬스터Phase 스낍
-                if(isVictory == null)
-                {
-                    //몬스터공격결과Scene
+                _battle.Scene_PlayerAttackResult();
+
+                _battle.Scene_BattleResult(); //조건을 충족하면 Battle종료, Queue에 0(0. 다음)이 담김.
+
+                //마지막 선택이 0(0. 다음)일 때, 배틀 종료
+                if (_battle.LastSelect() != 0)
+                {//>>배틀 속행
                     _battle.Scene_MonsterAttackResult();
-                    //플레이어 선택
-                    Program.KeyInputCheck(out _selectNext, _nextCount);
+                    _battle.DequeueSelection();// 0 (0. 다음)
 
+                    _battle.Scene_BattleResult(); //조건을 충족하면 Battle종료, Queue에 0(0. 다음)이 담김.
+                    //마지막 선택이 0(0. 다음)일 때, 배틀 종료
                 }
-                else//if (isVictory != null) ==전투결과Scene
+                //>>배틀 종료
+            }
+            else//>>플레이어 선택으로 돌아가기
+            {
+                //selectQueue 비우기
+                while (_battle.DequeueSelection() > -1)
                 {
-                    //전투결과Scene (승리, 패배 둘 다 여기 있음)
-                    _battle.Scene_BattleResult(isVictory, beforeBattlePlayerHP);
-                    //플레이어 선택
-                    Program.KeyInputCheck(out _selectNext, _nextCount);
+
                 }
-
-
+            }
+            
+            //>>배틀 종료 0(0. 다음) Dequeue
+            if (_battle.DequeueSelection() == 0)
+            {
+                SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
             }
 
-            
-            
 
         }
     }
