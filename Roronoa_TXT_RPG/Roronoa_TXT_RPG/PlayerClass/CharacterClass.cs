@@ -20,11 +20,11 @@ namespace Roronoa_TXT_RPG
             int _takeDamageHealthPoint = curHealthPoint - damage;
             if(_takeDamageHealthPoint < 0)
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {takeDamageHealthPoint}");
+                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {_takeDamageHealthPoint}");
             }
             else
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {takeDamageHealthPoint}");
+                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {_takeDamageHealthPoint}");
             }
             curHealthPoint = _takeDamageHealthPoint;
             return curHealthPoint;

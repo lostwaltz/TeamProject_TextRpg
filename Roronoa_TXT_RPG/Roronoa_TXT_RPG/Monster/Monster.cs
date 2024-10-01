@@ -30,9 +30,9 @@ namespace Roronoa_TXT_RPG
             //MP {마나} (마나가 있다면)	
         }
 
-        public void Attack()//기본공격
+        public void Attack(Character character)//기본공격
         {
-            AttackOpponent(AttackPower);
+            AttackOpponent(character, attackPower);
         }
         /*
         public void Skill()//스킬 이름별로 설정하면 될 듯
@@ -42,6 +42,11 @@ namespace Roronoa_TXT_RPG
         */
         internal class Goblin : Monster
         {
+            public Goblin(string name, int healthpoint, int attackdemage, int defense) : base(name, healthpoint, attackdemage, defense)
+            {
+                
+            }
+
             public void Randomstatus()
             {
                 Random random = new Random();
