@@ -12,20 +12,26 @@ using static Roronoa_TXT_RPG.Program;
 namespace Roronoa_TXT_RPG
 {
     
-    public class Player
+    public class Player : Character
     {
-        int Level = 1;
-        string Name;
-        int AttackPower;
-        int Defense;
-        int HealthPoint = 100;
-        int MP = 50;
-        bool isDead => HealthPoint <= 0;
+        int level = 1;
+        string name;
+        int attackPower;
+        int defense;
+        int maxHealthPoint = 100;
+        int curHealthPoint = 100;
+        int maxManaPoint = 50;
+        int curManaPoint = 50;
+        int gold = 0;
             
             public void Attack()
             {
                 Console.WriteLine("공격했습니다.");
             }
+        public void AddGold(int getGold)
+        {
+            gold += getGold;
+        }
     }
     public class Worrior : Player
     {                    
