@@ -43,17 +43,17 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
+        public virtual void PrintCharactorInfo(int beforeBattlePlayerHealthPoint)
         {
             if(curHealthPoint > 0)
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> {curHealthPoint}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
             }
             else
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> Dead");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
             }
         }
 	}
