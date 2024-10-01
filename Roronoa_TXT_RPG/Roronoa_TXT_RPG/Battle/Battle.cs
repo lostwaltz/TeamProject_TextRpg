@@ -38,7 +38,7 @@ namespace Roronoa_TXT_RPG
 
         //완료
         //나오는 선택 => 플레이어 행동: 1.공격, 2. 스킬...(0없음)
-        internal Queue<int> Scene_SelectPlayerAction()
+        internal void Scene_SelectPlayerAction()
         {
             Console.Clear();
             //Battle!!
@@ -67,14 +67,12 @@ namespace Roronoa_TXT_RPG
             //>>
             player.BattlePlayerSelect(selectQueue);
 
-
-            return selectQueue;
         }
 
 
         //완료
         //나오는 선택 => 공격할 몬스터 선택: 1 고블린, 2 오크...(0. 취소)
-        internal Queue<int> Scene_SelectAttackTarget()
+        internal void Scene_SelectAttackTarget()
         {
             Console.Clear();
             //Battle!!
@@ -111,12 +109,11 @@ namespace Roronoa_TXT_RPG
             //선택 큐에 넣기
             selectQueue.Enqueue(_selectTarget);
 
-            return selectQueue;
         }
 
         //완료
         //나오는 선택 => 다음으로 넘어가기: 0. 다음...
-        internal Queue<int> Scene_PlayerAttackResult()
+        internal void Scene_PlayerAttackResult()
         {
             Console.Clear();
             //Battle!!
@@ -150,13 +147,12 @@ namespace Roronoa_TXT_RPG
                 isVictory = true;
             }
             _monsterDeadCount = 0;
-            return selectQueue;
         }
 
 
         //완료
         //나오는 선택 => 다음으로 넘어가기: 0. 다음...
-        public Queue<int> Scene_MonsterAttackResult()
+        public void Scene_MonsterAttackResult()
         {
             Console.Clear();
             //Battle!!
@@ -179,7 +175,10 @@ namespace Roronoa_TXT_RPG
                 }
             }
 
-
+            if (player.isDead)
+            {
+                isVictory = false;
+            }
 
             //0.다음
             Console.WriteLine("0. 다음");
@@ -190,13 +189,12 @@ namespace Roronoa_TXT_RPG
             //선택 큐에 넣기
             selectQueue.Enqueue(_selectNext);
 
-            return selectQueue;
         }
 
         //완료
         //게임결과Scene 게임이 끝났다면 0(0. 다음)이 Queue에 담겨서 반환된다.
         //TryDequeue를 이용해 전투결과가 실행되었는지 확인할 수 있다.
-        public Queue<int> Scene_BattleResult()
+        public void Scene_BattleResult()
         {
             Console.Clear();
             if (isVictory == true)
@@ -257,7 +255,6 @@ namespace Roronoa_TXT_RPG
 
             }
 
-            return selectQueue;
         }
 
         //selectQueue의 마지막 요소 반환

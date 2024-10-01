@@ -23,16 +23,16 @@ namespace Roronoa_TXT_RPG
         //Battle이 시작됐을 때 메인
         public override void SceneUpdate()
         {
-            
+            //플레이어 행동 선택
             _battle.Scene_SelectPlayerAction();
 
+            //공격할 몬스터 선택
             _battle.Scene_SelectAttackTarget();
 
-            //마지막 선택이 0(0. 취소)일 때, 맨 처음으로 돌아가기
-            
+            //마지막 선택이 0(0. 취소)일 때, 플레이어 행동 선택으로 돌아가기
             if (_battle.LastSelect() != 0)
             {//>>속행
-
+                //플레이어의 공격!
                 _battle.Scene_PlayerAttackResult();
 
                 _battle.Scene_BattleResult(); //조건을 충족하면 Battle종료, Queue에 0(0. 다음)이 담김.
@@ -40,8 +40,10 @@ namespace Roronoa_TXT_RPG
                 //마지막 선택이 0(0. 다음)일 때, 배틀 종료
                 if (_battle.LastSelect() != 0)
                 {//>>배틀 속행
+                    //몬스터의 공격!
                     _battle.Scene_MonsterAttackResult();
-                    _battle.DequeueSelection();// 0 (0. 다음)
+                    _battle.DequeueSelection();// 0 (0. 다음) >>selectQueue비우기
+
 
                     _battle.Scene_BattleResult(); //조건을 충족하면 Battle종료, Queue에 0(0. 다음)이 담김.
                     //마지막 선택이 0(0. 다음)일 때, 배틀 종료
@@ -60,6 +62,7 @@ namespace Roronoa_TXT_RPG
             //>>배틀 종료 0(0. 다음) Dequeue
             if (_battle.DequeueSelection() == 0)
             {
+                //로비로 이동
                 SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
             }
 
