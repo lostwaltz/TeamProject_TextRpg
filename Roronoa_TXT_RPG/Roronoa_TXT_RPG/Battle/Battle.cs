@@ -167,6 +167,7 @@ namespace Roronoa_TXT_RPG
             //HP 100-> 94
             foreach (Monster monster in monsters)
             {
+                //죽지 않은 몬스터만 공격
                 if (!monster.isDead)
                 {
                     //몬스터 공격 구현부

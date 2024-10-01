@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Roronoa_TXT_RPG
 {
-    internal class Monster
+    internal class Monster : Character
     {
         public string Name { get; set; }
         public int HealthPoint { get; set; }

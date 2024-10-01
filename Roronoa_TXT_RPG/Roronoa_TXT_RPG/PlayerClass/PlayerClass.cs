@@ -12,7 +12,7 @@ using static Roronoa_TXT_RPG.Program;
 namespace Roronoa_TXT_RPG
 {
     
-    public class Player : Character
+    internal class Player : Character
     {
         int level = 1;
         string name;
@@ -33,7 +33,7 @@ namespace Roronoa_TXT_RPG
             gold += getGold;
         }
     }
-    public class Worrior : Player
+    internal class Worrior : Player
     {                    
         string Name = "Yaman";
         int AttackPower = 20;
@@ -44,7 +44,7 @@ namespace Roronoa_TXT_RPG
         }
 
     }
-    public class Wizard : Player
+    internal class Wizard : Player
     {
         string Name = "Zud";
         int AttackPower = 23;
@@ -54,7 +54,7 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine("스킬 파이어볼을 사용했습니다.");
         }
     }
-    public class Assassin : Player
+    internal class Assassin : Player
     {
         string Name = "sin";
         int AttackPower = 25;
