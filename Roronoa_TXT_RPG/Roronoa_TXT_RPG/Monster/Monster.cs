@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Roronoa_TXT_RPG
 {
-    internal class Monster : Character
+    internal class Monster
     {
         public string Name { get; set; }
         public int HealthPoint { get; set; }
@@ -14,48 +14,13 @@ namespace Roronoa_TXT_RPG
         public int Defense { get; set; }
         public int Speed { get; set; }
 
-        public Monster(string name, int healthpoint, int attackdemage, int defense)
+        public Monster(string name, int healthpoint, int attackdemage, int defense, int speed)
         {
             Name = name;
             HealthPoint = healthpoint;
             AttackDemage = attackdemage;
             Defense = defense;
-        }
-
-        public override void PrintCharactorInfo() //몬스터 정보 출력 함수
-        {
-            Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
-
-
-            //MP {마나} (마나가 있다면)	
-        }
-
-        public void Attack(Character character)//기본공격
-        {
-            AttackOpponent(character, attackPower);
-        }
-        /*
-        public void Skill()//스킬 이름별로 설정하면 될 듯
-        {
-            AttackOpponent(SkillPower);
-        }
-        */
-        internal class Goblin : Monster
-        {
-            public Goblin(string name, int healthpoint, int attackdemage, int defense) : base(name, healthpoint, attackdemage, defense)
-            {
-                
-            }
-
-            public void Randomstatus()
-            {
-                Random random = new Random();
-                for (int i = 0; i < 10; i++)
-                {
-                    int randomValue = random.Next(30, 50);
-                    Console.WriteLine(randomValue);
-                }
-            }
+            Speed = speed;
         }
     }
 }
