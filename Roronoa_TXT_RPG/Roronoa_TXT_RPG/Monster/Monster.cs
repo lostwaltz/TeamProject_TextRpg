@@ -42,7 +42,11 @@ namespace Roronoa_TXT_RPG
         */
         internal class Goblin : Monster
         {
-            public void Randomstatus()
+            internal Goblin(string name, int healthPoint, int attackdemage, int defense)
+            {
+
+            }
+                public void Randomstatus()
             {
                 Random random = new Random();
                 for (int i = 0; i < 10; i++)
