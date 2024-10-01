@@ -17,12 +17,7 @@ namespace Roronoa_TXT_RPG.Save
 
         public override SaveData Save()
         {
-            SaveData test = new PlayerSaveData;
-
-            return test;
+            return new PlayerSaveData();
         }
     }
-
-
-
 }
