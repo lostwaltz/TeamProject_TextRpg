@@ -8,20 +8,6 @@ namespace Roronoa_TXT_RPG
 {
     internal class Monster : Character
     {
-        public string Name { get; set; }
-        public int HealthPoint { get; set; }
-        public int AttackDemage { get; set; }
-        public int Defense { get; set; }
-        public int Speed { get; set; }
-
-        public Monster(string name, int healthpoint, int attackdemage, int defense)
-        {
-            Name = name;
-            HealthPoint = healthpoint;
-            AttackDemage = attackdemage;
-            Defense = defense;
-        }
-
         public override void PrintCharactorInfo() //몬스터 정보 출력 함수
         {
             Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
@@ -42,7 +28,7 @@ namespace Roronoa_TXT_RPG
         */
         internal class Goblin : Monster
         {
-            public Goblin(string name, int healthpoint, int attackdemage, int defense) : base(name, healthpoint, attackdemage, defense)
+            public Goblin()
             {
                 
             }
