@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Roronoa_TXT_RPG
 {
-	public class Character
+    internal class Character
 	{
         int level;
         string name;
@@ -17,8 +17,8 @@ namespace Roronoa_TXT_RPG
 
         public int TakeDamage(int damage)
         {
-            int takeDamageHealthPoint = curHealthPoint - damage;
-            if(takeDamageHealthPoint < 0)
+            int _takeDamageHealthPoint = curHealthPoint - damage;
+            if(_takeDamageHealthPoint < 0)
             {
                 Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {takeDamageHealthPoint}");
             }
@@ -26,7 +26,7 @@ namespace Roronoa_TXT_RPG
             {
                 Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {takeDamageHealthPoint}");
             }
-            curHealthPoint = takeDamageHealthPoint;
+            curHealthPoint = _takeDamageHealthPoint;
             return curHealthPoint;
         }
 
@@ -34,6 +34,13 @@ namespace Roronoa_TXT_RPG
         {
             Console.WriteLine($"{name}의 공격!");
             Console.WriteLine($"{opponent}을(를) 공격했습니다. [데미지: {damage}]");
+
+            opponent.TakeDamage(damage);
+        }
+
+        public virtual void PrintCharactorInfo()    
+        {
+
         }
 
         public virtual void PrintCharaterInfo(int befireBattlePlayerHealthPoint)

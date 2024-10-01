@@ -9,13 +9,15 @@ using Roronoa_TXT_RPG;
 using static System.Formats.Asn1.AsnWriter;
 using static Roronoa_TXT_RPG.Program;
 
+enum PLAYER_ACTION_TYPE { ATTACK = 1, SKILL }
 namespace Roronoa_TXT_RPG
 {
     
-    public class Player : Character
+    internal class Player : Character
     {
         int level = 1;
         string name;
+        string job;
         int attackPower;
         int defense;
         int maxHealthPoint = 100;
@@ -28,12 +30,63 @@ namespace Roronoa_TXT_RPG
             {
                 Console.WriteLine("공격했습니다.");
             }
+            public void Skill()
+            {
+                Console.WriteLine("스킬을 사용했습니다.");
+            } 
+
         public void AddGold(int getGold)
         {
             gold += getGold;
         }
+
+        
+        public override void PrintCharactorInfo()
+        {
+            Console.WriteLine("[내정보]");
+            Console.WriteLine($"Lv.{level} {name} {job}");
+            Console.WriteLine($"HP: {curHealthPoint}/{maxHealthPoint}");
+        }
+       
+
+        string[] battlePlayerSelectType = { "공격" };
+
+        void BattlePlayerSelect(Queue<int> selectQueue)
+        {
+            Attack();
+            Skill();
+
+            for(int i = 0; i < battlePlayerSelectType.Length; i++)
+            {
+                int playerSelectNum = i + 1;
+                Console.WriteLine($"{playerSelectNum}.{battlePlayerSelectType[i]}");
+            }
+            Console.WriteLine($"");
+
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine(">>");
+
+            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length);
+
+            selectQueue.Enqueue(_selectPlayerAction);
+        }
+
+        
+        void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
+        {
+            PLAYER_ACTION_TYPE playerAction = (PLAYER_ACTION_TYPE)selectQueue.Dequeue();
+            switch(playerAction)
+            {
+                case PLAYER_ACTION_TYPE.ATTACK:
+                int selectMonster = selectQueue.Dequeue();
+                    AttackOpponent(monstersList[selectMonster], attackPower);
+                    break;
+            }
+             
+
+        }
     }
-    public class Worrior : Player
+    class Worrior : Player
     {                    
         string Name = "Yaman";
         int AttackPower = 20;
@@ -44,7 +97,7 @@ namespace Roronoa_TXT_RPG
         }
 
     }
-    public class Wizard : Player
+    class Wizard : Player
     {
         string Name = "Zud";
         int AttackPower = 23;
@@ -54,7 +107,7 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine("스킬 파이어볼을 사용했습니다.");
         }
     }
-    public class Assassin : Player
+    class Assassin : Player
     {
         string Name = "sin";
         int AttackPower = 25;
