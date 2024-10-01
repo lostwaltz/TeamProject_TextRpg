@@ -32,7 +32,7 @@ namespace Roronoa_TXT_RPG
         {
             isVictory = null;
             _monsterDeadCount = 0;
-            _beforeBattlePlayerHP = player.CurHealthPoint;
+            _beforeBattlePlayerHP = Program.player.TakeDamage(0);
         }
 
 
