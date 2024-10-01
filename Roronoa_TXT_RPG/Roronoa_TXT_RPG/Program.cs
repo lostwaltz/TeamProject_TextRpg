@@ -4,6 +4,8 @@ namespace Roronoa_TXT_RPG
 {
     internal class Program
     {
+        public static Player player = new Player();
+
         private static bool isRunGame = true;
 
         static void Main(string[] args)
