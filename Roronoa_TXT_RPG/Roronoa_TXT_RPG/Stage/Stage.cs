@@ -18,7 +18,7 @@ namespace Roronoa_TXT_RPG
         }
         List<Monster> monsters = new List<Monster> { new Monster(), new Monster(), new Monster() };//고블린, 엘프, 오크 등등으로 바꾸면된다.
 
-        List<List<MONSTER_TYPE>> stage = new List<List<MONSTER_TYPE>> {
+        List<List<MONSTER_TYPE>> allStageMonsters = new List<List<MONSTER_TYPE>> {
             new List<MONSTER_TYPE> { MONSTER_TYPE.SLIME, MONSTER_TYPE.SLIME, MONSTER_TYPE.SLIME },   // Stage 1
             new List<MONSTER_TYPE> { MONSTER_TYPE.SLIME, MONSTER_TYPE.SLIME, MONSTER_TYPE.GOBLIN },  // Stage 2
             new List<MONSTER_TYPE> { MONSTER_TYPE.SLIME, MONSTER_TYPE.GOBLIN, MONSTER_TYPE.GOBLIN }, // Stage 3
@@ -39,9 +39,14 @@ namespace Roronoa_TXT_RPG
         {
             level++;
         }
-        public List<MONSTER_TYPE> TakeMostersTypeForStage()
+        public List<MONSTER_TYPE> TakeMostersTypeForEachStage()
         {
-            return stage[level - 1];
+            return allStageMonsters[level - 1];
+        }
+
+        public void PrintStage()
+        {
+            Console.Write($"Stage {level}");
         }
     }
 }
