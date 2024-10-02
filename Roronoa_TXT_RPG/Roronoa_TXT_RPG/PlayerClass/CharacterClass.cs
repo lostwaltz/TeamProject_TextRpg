@@ -25,7 +25,7 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($"체력: {curHealthPoint}/{maxHealthPoint}");
             Console.WriteLine($"Gold: {gold}G");
             Console.WriteLine($" ");
-            Console.WriteLine($"0.나가기");
+            Console.WriteLine($"0. 나가기");
             Console.WriteLine($" ");
             Console.WriteLine($"원하시는 행동을 입력해주세요.");
             Console.Write($">>");
@@ -39,27 +39,40 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public int TakeDamage(int damage)
+        public void TakeDamage(int damage)
         {
-            int _takeDamageHealthPoint = curHealthPoint - (damage - defense);
+            int trueDamage = damage - defense;
+            if (trueDamage < 0)
+            {
+                trueDamage = 0;
+            }
+            int _takeDamageHealthPoint = curHealthPoint - (trueDamage);
+            if ((curHealthPoint - (trueDamage)) > maxHealthPoint)
+            {
+                _takeDamageHealthPoint = maxHealthPoint;
+            }
+            
             if(_takeDamageHealthPoint < 0)
             {
-                Console.WriteLine($"Lv.{level} {name}이(가){damage}만큼 데미지를 받아 사망했습니다. " +
-                    $"현재체력: {curHealthPoint} -> Dead");
+                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
+                    $"HP {curHealthPoint} -> Dead");
+                Console.WriteLine();
             }
             else
             {
-                Console.WriteLine($"Lv.{level} {name}이(가){damage}만큼 데미지를 받았습니다. " +
-                    $"현재체력: {curHealthPoint} -> {_takeDamageHealthPoint}");
+                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}이(가) {trueDamage}만큼 데미지를 받았습니다. " +
+                    $"HP {curHealthPoint} -> {_takeDamageHealthPoint}");
+                Console.WriteLine();
             }
             curHealthPoint = _takeDamageHealthPoint;
-            return curHealthPoint;
         }
 
         public void AttackOpponent(Character opponent, int damage)
         {
             Console.WriteLine($"{name}의 공격!");
-            Console.WriteLine($"{opponent}을(를) 공격했습니다. [데미지: {damage}]");
+            Console.WriteLine($"{opponent.name}을(를) 공격했습니다. [데미지: {damage}]");
 
             opponent.TakeDamage(damage);
         }
@@ -73,12 +86,12 @@ namespace Roronoa_TXT_RPG
         {
             if(curHealthPoint > 0)
             {
-                Console.WriteLine($"{level} {name}");
+                Console.WriteLine($"Lv.{level} {name}");
                 Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
             }
             else
             {
-                Console.WriteLine($"{level} {name}");
+                Console.WriteLine($"Lv.{level} {name}");
                 Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
             }
         }
