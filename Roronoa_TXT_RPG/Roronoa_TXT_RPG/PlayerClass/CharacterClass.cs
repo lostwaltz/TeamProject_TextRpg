@@ -29,6 +29,14 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($" ");
             Console.WriteLine($"원하시는 행동을 입력해주세요.");
             Console.Write($">>");
+
+            Program.KeyInputCheck(out int input,0) ;
+            if (input == 0)
+            {
+                SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
+                return;
+            }
+
         }
 
         public int TakeDamage(int damage)
