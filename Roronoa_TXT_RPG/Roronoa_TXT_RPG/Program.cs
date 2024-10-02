@@ -42,7 +42,7 @@ namespace Roronoa_TXT_RPG
             if (false == isNumber || safeNumberRange < selectNumber || selectNumber < 0)
             {
                 Console.Write("잘못된 입력입니다.");
-                Thread.Sleep(1500);
+                Thread.Sleep(1000);
                 return false;
             }
             return true;
@@ -58,7 +58,7 @@ namespace Roronoa_TXT_RPG
             if (false == isNumber || safeNumberRange < selectNumber || selectNumber < 0)
             {
                 Console.Write("잘못된 입력입니다.");
-                Thread.Sleep(1500);
+                Thread.Sleep(1000);
                 if(true == keyCheckAgain)
                 {
                     KeyInputCheck(out selectNumber, safeNumberRange, keyCheckAgain);

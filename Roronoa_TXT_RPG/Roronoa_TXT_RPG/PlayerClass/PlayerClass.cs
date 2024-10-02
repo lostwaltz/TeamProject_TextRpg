@@ -81,7 +81,7 @@ namespace Roronoa_TXT_RPG
             switch(playerAction)
             {
                 case PLAYER_ACTION_TYPE.ATTACK:
-                int selectMonster = selectQueue.Dequeue();
+                int selectMonster = selectQueue.Dequeue() - 1;//입력받은 선택지 - 1
                     AttackOpponent(monstersList[selectMonster], attackPower);
                     break;
             }
