@@ -3,17 +3,32 @@ namespace Roronoa_TXT_RPG
 {
     internal class Character
 	{
-        protected int level { get; set; }
-        protected string name { get; set; }
-        protected string job { get; set; }
-        protected int attackPower { get; set; }
-        protected int defense { get; set; }
-        protected int maxHealthPoint { get; set; }
-        public int curHealthPoint { get; private set; }
-        protected int maxManaPoint { get; set; }
-        protected int curManaPoint { get; set; }
-        protected int gold { get; set; }
+        public int level { get; protected set; }
+        public string name { get; protected set; }
+        public string job { get; protected set; }
+        public int attackPower { get; protected set; }
+        public int defense { get; protected set; }
+        public int maxHealthPoint { get; protected set; }
+        public int curHealthPoint { get; protected set; }
+        public int maxManaPoint { get; protected set; }
+        public int curManaPoint { get; protected set; }
+        public int gold { get; protected set; }
         public bool isDead => curHealthPoint <= 0;
+
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"Lv.{level}");
+            Console.WriteLine($"{name} ({job})");
+            Console.WriteLine($"공격력: {attackPower}");
+            Console.WriteLine($"방어력: {defense}");
+            Console.WriteLine($"체력: {curHealthPoint}/{maxHealthPoint}");
+            Console.WriteLine($"Gold: {gold}G");
+            Console.WriteLine($" ");
+            Console.WriteLine($"0.나가기");
+            Console.WriteLine($" ");
+            Console.WriteLine($"원하시는 행동을 입력해주세요.");
+            Console.WriteLine($">>");
+        }
 
         public int TakeDamage(int damage)
         {
@@ -43,7 +58,7 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public virtual void PrintCharactorInfo(int beforeBattlePlayerHealthPoint)
+        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
         {
             if(curHealthPoint > 0)
             {

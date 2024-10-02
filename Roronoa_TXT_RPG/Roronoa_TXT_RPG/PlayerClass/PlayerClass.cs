@@ -54,7 +54,7 @@ namespace Roronoa_TXT_RPG
 
         string[] battlePlayerSelectType = { "공격" };
 
-        void BattlePlayerSelect(Queue<int> selectQueue)
+       public void BattlePlayerSelect(Queue<int> selectQueue)
         {
             Attack();
             Skill();
@@ -75,7 +75,7 @@ namespace Roronoa_TXT_RPG
         }
 
         
-        void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
+       public void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
         {
             PLAYER_ACTION_TYPE playerAction = (PLAYER_ACTION_TYPE)selectQueue.Dequeue();
             switch(playerAction)
@@ -89,9 +89,9 @@ namespace Roronoa_TXT_RPG
 
         }
     }
-    class Worrior : Player
+    internal class Worrior : Player
     {                    
-        Worrior()
+        internal Worrior()
         {
             name = "Yaman";
             attackPower = 20;
@@ -104,9 +104,9 @@ namespace Roronoa_TXT_RPG
         }
 
     }
-    class Wizard : Player
+    internal class Wizard : Player
     {
-        Wizard()
+        internal Wizard()
         {
             name = "Zud";
             attackPower = 23;
@@ -117,9 +117,9 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine("스킬 파이어볼을 사용했습니다.");
         }
     }
-    class Assassin : Player
+    internal class Assassin : Player
     {
-        Assassin()
+        internal Assassin()
         {
             name = "sin";
             attackPower = 25;
