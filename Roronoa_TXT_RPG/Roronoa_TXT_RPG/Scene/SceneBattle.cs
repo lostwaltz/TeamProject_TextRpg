@@ -14,7 +14,11 @@ namespace Roronoa_TXT_RPG
 {
     internal class SceneBattle : Scene
     {
-        Battle _battle = new Battle();
+        Battle _battle;
+        internal SceneBattle()
+        {
+            _battle = new Battle();
+        }
         public override void SceneUpdate()
         {
             
@@ -39,7 +43,8 @@ namespace Roronoa_TXT_RPG
                 }
                 if (_battle.DequeueSelection() == 0)
                 {
-                    //Program.stage.StageUp();
+                    Program.stage.StageUp();
+                    _battle = new Battle();
                     SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
                 }
             }
