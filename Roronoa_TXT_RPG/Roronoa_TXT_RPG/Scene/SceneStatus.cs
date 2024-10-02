@@ -14,6 +14,8 @@ namespace Roronoa_TXT_RPG
 
         public override void SceneUpdate()
         {
+            Program.player.DisplayInfo();
+            Program.KeyInputCheck(out int YMCA, 666);
         }
     }
 }
