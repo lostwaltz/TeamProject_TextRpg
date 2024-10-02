@@ -10,7 +10,14 @@ namespace Roronoa_TXT_RPG
     {
         public override void PrintCharacterInfo() //몬스터 정보 출력 함수
         {
-            Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
+            if (curHealthPoint > 0)
+            {
+                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} HP {curHealthPoint, -5} MP {curManaPoint}");
+            }
+            else
+            {
+                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} Dead");
+            }
         }
 
         public void Attack(Character character)
@@ -29,7 +36,8 @@ namespace Roronoa_TXT_RPG
             {
                 level = randomLevel;
 
-                curHealthPoint = randomHealthPoint;
+                maxHealthPoint = randomHealthPoint;
+                curHealthPoint = maxHealthPoint;
 
                 curManaPoint = randomManaPoint;
 
@@ -62,7 +70,8 @@ namespace Roronoa_TXT_RPG
             {
                 level = randomLevel;
 
-                curHealthPoint = randomHealthPoint;
+                maxHealthPoint = randomHealthPoint;
+                curHealthPoint = maxHealthPoint;
 
                 curManaPoint = randomManaPoint;
 
@@ -95,7 +104,8 @@ namespace Roronoa_TXT_RPG
             {
                 level = randomLevel;
 
-                curHealthPoint = randomHealthPoint;
+                maxHealthPoint = randomHealthPoint;
+                curHealthPoint = maxHealthPoint;
 
                 curManaPoint = randomManaPoint;
 
@@ -149,7 +159,8 @@ namespace Roronoa_TXT_RPG
             {
                 level = randomLevel;
 
-                curHealthPoint = randomHealthPoint;
+                maxHealthPoint = randomHealthPoint;
+                curHealthPoint = maxHealthPoint;
 
                 curManaPoint = randomManaPoint;
 
