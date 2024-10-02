@@ -19,26 +19,33 @@ namespace Roronoa_TXT_RPG
         {
             
             _battle.SceneSelectPlayerAction();
-            _battle.SceneSelectAttackTarget();
-            if (_battle.LastSelect() != 0)
-            {
-                _battle.ScenePlayerAttackResult();
-                _battle.DequeueSelection();
-                _battle.SceneIsBattleResult(); 
-                if (_battle.LastSelect() != 0)
+            if (_battle.LastSelect() != 0) { //0이면 도망
+                _battle.SceneSelectAttackTarget();
+                if (_battle.LastSelect() != 0)//0이면 다시 플레이어 선택
                 {
-                    _battle.SceneMonsterAttackResult();
+                    _battle.ScenePlayerAttackResult();
                     _battle.DequeueSelection();
                     _battle.SceneIsBattleResult(); 
+                    if (_battle.LastSelect() != 0)
+                    {
+                        _battle.SceneMonsterAttackResult();
+                        _battle.DequeueSelection();
+                        _battle.SceneIsBattleResult(); 
+                    }
+                }
+                else
+                {
+                    while (_battle.DequeueSelection() > -1) { }
+                }
+                if (_battle.DequeueSelection() == 0)
+                {
+                    //Program.stage.StageUp();
+                    SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
                 }
             }
             else
             {
-                while (_battle.DequeueSelection() > -1) { }
-            }
-            if (_battle.DequeueSelection() == 0)
-            {
-                //Program.stage.StageUp();
+                _battle.DequeueSelection();
                 SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
             }
         }

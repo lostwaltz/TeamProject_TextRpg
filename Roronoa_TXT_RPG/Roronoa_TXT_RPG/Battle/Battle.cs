@@ -108,7 +108,7 @@ namespace Roronoa_TXT_RPG
             //>>
             Console.WriteLine("대상을 선택해주세요.");
             Console.Write(">>");
-            Program.KeyInputCheck(out int _selectTarget, monsters.Count+1, true);
+            Program.KeyInputCheck(out int _selectTarget, monsters.Count, true);
 
             //선택 큐에 넣기
             selectQueue.Enqueue(_selectTarget);

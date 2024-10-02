@@ -62,14 +62,14 @@ namespace Roronoa_TXT_RPG
             for(int i = 0; i < battlePlayerSelectType.Length; i++)
             {
                 int playerSelectNum = i + 1;
-                Console.WriteLine($"{playerSelectNum}.{battlePlayerSelectType[i]}");
+                Console.WriteLine($"{playerSelectNum}. {battlePlayerSelectType[i]}");
             }
             Console.WriteLine($"");
-
+            Console.WriteLine($"0. 도망");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length);
+            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length, true);
 
             selectQueue.Enqueue(_selectPlayerAction);
         }
