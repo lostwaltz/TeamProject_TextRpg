@@ -7,6 +7,7 @@ namespace Roronoa_TXT_RPG
         public string name { get; protected set; }
         public string job { get; protected set; }
         public int attackPower { get; protected set; }
+        public int skillPower { get; set; }
         public int defense { get; protected set; }
         public int maxHealthPoint { get; protected set; }
         public int curHealthPoint { get; protected set; }
@@ -27,19 +28,21 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($"0.나가기");
             Console.WriteLine($" ");
             Console.WriteLine($"원하시는 행동을 입력해주세요.");
-            Console.WriteLine($">>");
+            Console.Write($">>");
         }
 
         public int TakeDamage(int damage)
         {
-            int _takeDamageHealthPoint = curHealthPoint - damage;
+            int _takeDamageHealthPoint = curHealthPoint - (damage - defense);
             if(_takeDamageHealthPoint < 0)
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {_takeDamageHealthPoint}");
+                Console.WriteLine($"Lv.{level} {name}이(가){damage}만큼 데미지를 받아 사망했습니다. " +
+                    $"현재체력: {curHealthPoint} -> Dead");
             }
             else
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {_takeDamageHealthPoint}");
+                Console.WriteLine($"Lv.{level} {name}이(가){damage}만큼 데미지를 받았습니다. " +
+                    $"현재체력: {curHealthPoint} -> {_takeDamageHealthPoint}");
             }
             curHealthPoint = _takeDamageHealthPoint;
             return curHealthPoint;
@@ -53,22 +56,22 @@ namespace Roronoa_TXT_RPG
             opponent.TakeDamage(damage);
         }
 
-        public virtual void PrintCharactorInfo()    
+        public virtual void PrintCharacterInfo()    
         {
 
         }
 
-        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
+        public virtual void PrintCharacterInfo(int beforeBattlePlayerHealthPoint)
         {
             if(curHealthPoint > 0)
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> {curHealthPoint}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
             }
             else
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> Dead");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
             }
         }
 	}

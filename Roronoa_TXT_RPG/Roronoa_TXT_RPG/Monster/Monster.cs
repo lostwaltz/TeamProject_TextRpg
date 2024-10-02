@@ -8,7 +8,7 @@ namespace Roronoa_TXT_RPG
 {
     internal class Monster : Character
     {
-        public override void PrintCharactorInfo() //몬스터 정보 출력 함수
+        public override void PrintCharacterInfo() //몬스터 정보 출력 함수
         {
             Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
 
