@@ -47,5 +47,25 @@ namespace Roronoa_TXT_RPG
             }
             return true;
         }
+
+        public static bool KeyInputCheck(out int selectNumber, int safeNumberRange, bool keyCheckAgain)
+        {
+            string? input = Console.ReadLine();
+            bool isNumber = int.TryParse(input, out int number);
+
+            selectNumber = number;
+
+            if (false == isNumber || safeNumberRange < selectNumber || selectNumber < 0)
+            {
+                Console.Write("잘못된 입력입니다.");
+                Thread.Sleep(1500);
+                if(true == keyCheckAgain)
+                {
+                    KeyInputCheck(out selectNumber, safeNumberRange, keyCheckAgain);
+                }
+                return false;
+            }
+            return true;
+        }
     }
 }
