@@ -9,11 +9,11 @@ namespace Roronoa_TXT_RPG
         protected int attackPower { get; set; }
         protected int defense { get; set; }
         protected int maxHealthPoint { get; set; }
-        protected int curHealthPoint { get; set; }
+        public int curHealthPoint { get; private set; }
         protected int maxManaPoint { get; set; }
         protected int curManaPoint { get; set; }
         protected int gold { get; set; }
-        protected bool isDead => curHealthPoint <= 0;
+        public bool isDead => curHealthPoint <= 0;
 
         public int TakeDamage(int damage)
         {
