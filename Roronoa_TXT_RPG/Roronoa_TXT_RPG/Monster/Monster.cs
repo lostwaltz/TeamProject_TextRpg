@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,186 +14,259 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($"Lv. {level} \t {name} \t HP {curHealthPoint} \t MP {curManaPoint}");
         }
 
-        public void Attack(Character character)
+        public virtual void Attack(Character name)
         {
-            AttackOpponent(character, attackPower);
+            SkillProbability();
+            AttackOpponent(name, attackPower);
         }
 
-        public void Skill()
+        public int lucky;
+
+        public void SkillProbability()
         {
-            AttackOpponent(SkillPower);
+            Random random = new Random();
+            lucky = random.Next(1, 11);
         }
 
-        internal class Goblin : Monster
+        public float skillPower;
+
+
+        public void Skill(Character name)
         {
-            public Goblin(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-            {
-                level = randomLevel;
-
-                curHealthPoint = randomHealthPoint;
-
-                curManaPoint = randomManaPoint;
-
-                attackPower = randomAttackPower;
-
-                name = "고블린";
-
-                if (curHealthPoint > 47 && attackPower > 18)
-                {
-                    name = "고블린족의 장";
-                }
-            }
-
-            public void Randomstatus()
-            {
-                Random random = new Random();
-
-                int randomLevel = random.Next(1, 5);
-
-                int randomHealthPoint = random.Next(30, 50);
-
-                int randomManaPoint = random.Next(5, 20);
-
-                int randomAttackPower = random.Next(15, 20);
-            }
+            AttackOpponent(name, (int) skillPower);
         }
-        internal class Elf : Monster
+    }
+
+
+    internal class Goblin : Monster
+    {
+        public Goblin(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower, int randomDefense)
         {
-            public Elf(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
+
+            name = "고블린";
+
+            if (maxHealthPoint > 47 && attackPower > 18)
             {
-                level = randomLevel;
-
-                curHealthPoint = randomHealthPoint;
-
-                curManaPoint = randomManaPoint;
-
-                attackPower = randomAttackPower;
-
-                name = "엘프";
-
-                if (curHealthPoint > 100 && attackPower > 40)
-                {
-                    name = "하이 엘프";
-                }
+                name = "고블린족의 장";
             }
 
-            public void Randomstatus()
+            Randomstatus();
+
+            if (lucky < 4)
             {
-                Random random = new Random();
-
-                int randomLevel = random.Next(3, 6);
-
-                int randomHealthPoint = random.Next(80, 120);
-
-                int randomManaPoint = random.Next(100, 150);
-
-                int randomAttackPower = random.Next(30, 50);
-            }
-        }
-        internal class Orc : Monster
-        {
-            public Orc(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-            {
-                level = randomLevel;
-
-                curHealthPoint = randomHealthPoint;
-
-                curManaPoint = randomManaPoint;
-
-                attackPower = randomAttackPower;
-
-                name = "오크";
-
-                if (curHealthPoint > 140 && attackPower > 50)
-                {
-                    name = "오크족의 장";
-                }
-            }
-
-            public void Randomstatus()
-            {
-                Random random = new Random();
-
-                int randomLevel = random.Next(3, 8);
-
-                int randomHealthPoint = random.Next(130, 150);
-
-                int randomManaPoint = random.Next(10, 25);
-
-                int randomAttackPower = random.Next(40, 60);
+                skillPower = attackPower * 1.5f;
             }
         }
 
-        internal class Dragon : Monster
+        public void Randomstatus()
         {
-            public Dragon(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
+            Random random = new Random();
+
+            int randomLevel = random.Next(1, 5);
+
+            int randomHealthPoint = random.Next(30, 50);
+
+            int randomManaPoint = random.Next(5, 20);
+
+            int randomAttackPower = random.Next(15, 20);
+
+            int randomDefense = random.Next(3, 6);
+        }
+
+        public void SkillProbability()
+        {
+
+        }
+    }
+    internal class Elf : Monster
+    {
+        public Elf(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower, int randomDefense)
+        {
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
+
+            name = "엘프";
+
+            if (maxHealthPoint > 100 && attackPower > 40)
             {
-                level = randomLevel;
-
-                curHealthPoint = randomHealthPoint;
-
-                curManaPoint = randomManaPoint;
-
-                attackPower = randomAttackPower;
-
-                name = "드래곤";
-
-                if (curHealthPoint > 1790)
-                {
-                    name = "신격 드래곤";
-                }
+                name = "하이 엘프";
             }
 
-            public void Randomstatus()
+            Randomstatus();
+
+            if (lucky > 0)
             {
-                Random random = new Random();
-
-                int randomLevel = random.Next(18, 20);
-
-                int randomHealthPoint = random.Next(1500, 1800);
-
-                int randomManaPoint = random.Next(500, 1000);
-
-                int randomAttackPower = random.Next(130, 150);
+                skillPower = attackPower * 2f;
             }
         }
-        internal class Slime : Monster
+
+        public override void Attack(Character name)
         {
-            public Slime(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
+            AttackOpponent(name, attackPower);
+        }
+
+        public void Randomstatus()
+        {
+            Random random = new Random();
+
+            level = random.Next(3, 6);
+
+            int randomHealthPoint = random.Next(80, 120);
+
+            int randomManaPoint = random.Next(100, 150);
+
+            int randomAttackPower = random.Next(30, 50);
+
+            int randomDefense = random.Next(8, 13);
+        }
+    }
+    internal class Orc : Monster
+    {
+        public Orc(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower, int randomDefense)
+        {
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
+
+            name = "오크";
+
+            if (maxHealthPoint > 140 && attackPower > 50)
             {
-                level = randomLevel;
-
-                curHealthPoint = randomHealthPoint;
-
-                curManaPoint = randomManaPoint;
-
-                attackPower = randomAttackPower;
-
-                name = "슬라임";
-
-                if (curHealthPoint < 15)
-                {
-                    name = "하찮은 슬라임";
-                }
-
-                if (curHealthPoint > 28)
-                {
-                    name = "킹슬라임";
-                }
+                name = "오크족의 장";
             }
 
-            public void Randomstatus()
+            //Randomstatus();
+
+            //if (maxHealthPoint * 0.5f > curHealthPoint)
+            //{
+            //    attackPower = float.Parse(attackPower) * 1.5f;
+            //}
+        }
+
+        public void Randomstatus()
+        {
+            Random random = new Random();
+
+            int randomLevel = random.Next(3, 8);
+
+            int randomHealthPoint = random.Next(130, 150);
+
+            int randomManaPoint = random.Next(10, 25);
+
+            int randomAttackPower = random.Next(40, 60);
+
+            int randomDefense = random.Next(13, 16);
+        }
+    }
+
+    internal class Dragon : Monster
+    {
+        public Dragon(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower, int randomDefense)
+        {
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
+
+            name = "드래곤";
+
+            if (maxHealthPoint > 1790)
             {
-                Random random = new Random();
-
-                int randomLevel = random.Next(1, 2);
-
-                int randomHealthPoint = random.Next(10, 30);
-
-                int randomManaPoint = random.Next(0, 0);
-
-                int randomAttackPower = random.Next(5, 10);
+                name = "신격 드래곤";
             }
+
+            Randomstatus();
+        }
+
+        public void Randomstatus()
+        {
+            Random random = new Random();
+
+            int randomLevel = random.Next(18, 20);
+
+            int randomHealthPoint = random.Next(1500, 1800);
+
+            int randomManaPoint = random.Next(500, 1000);
+
+            int randomAttackPower = random.Next(130, 150);
+
+            int randomDefense = random.Next(30, 35);
+        }
+    }
+    internal class Slime : Monster
+    {
+        public Slime(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower, int randomDefense)
+        {
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
+
+            name = "슬라임";
+
+            if (curHealthPoint < 15)
+            {
+                name = "하찮은 슬라임";
+            }
+
+            if (maxHealthPoint > 28)
+            {
+                name = "킹슬라임";
+            }
+
+            Randomstatus();
+
+            if (lucky > 6)
+            {
+                skillPower = attackPower * 1.5f;
+            }
+        }
+
+        public void Randomstatus()
+        {
+            Random random = new Random();
+
+            int randomLevel = random.Next(1, 2);
+
+            int randomHealthPoint = random.Next(10, 30);
+
+            int randomManaPoint = random.Next(0, 0);
+
+            int randomAttackPower = random.Next(5, 10);
+
+            int randomDefense = random.Next(1, 3);
         }
     }
 }
