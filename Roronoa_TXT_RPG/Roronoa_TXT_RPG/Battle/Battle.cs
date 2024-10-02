@@ -125,7 +125,7 @@ namespace Roronoa_TXT_RPG
             //
             //Lv.3 공허충
             //HP 10->Dead
-            BattlePlayerAction(selectQueue, monsters);
+            Program.player.BattlePlayerAction(selectQueue, monsters);
 
             //0.다음
             Console.WriteLine("0. 다음");

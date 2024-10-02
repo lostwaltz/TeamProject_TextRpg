@@ -20,7 +20,7 @@ namespace Roronoa_TXT_RPG
 
         public void Skill()
         {
-            AttackOpponent(SkillPower);
+            //AttackOpponent(SkillPower);
         }
 
         internal class Goblin : Monster
