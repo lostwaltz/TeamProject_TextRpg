@@ -54,7 +54,7 @@ namespace Roronoa_TXT_RPG
 
         string[] battlePlayerSelectType = { "공격" };
 
-        void BattlePlayerSelect(Queue<int> selectQueue)
+       public void BattlePlayerSelect(Queue<int> selectQueue)
         {
             Attack();
             Skill();
@@ -75,7 +75,7 @@ namespace Roronoa_TXT_RPG
         }
 
         
-        void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
+       public void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
         {
             PLAYER_ACTION_TYPE playerAction = (PLAYER_ACTION_TYPE)selectQueue.Dequeue();
             switch(playerAction)

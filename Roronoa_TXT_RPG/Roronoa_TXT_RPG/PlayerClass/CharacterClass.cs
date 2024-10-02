@@ -3,17 +3,17 @@ namespace Roronoa_TXT_RPG
 {
     internal class Character
 	{
-        protected int level { get; set; }
-        protected string name { get; set; }
-        protected string job { get; set; }
-        protected int attackPower { get; set; }
-        protected int defense { get; set; }
-        protected int maxHealthPoint { get; set; }
-        protected int curHealthPoint { get; set; }
-        protected int maxManaPoint { get; set; }
-        protected int curManaPoint { get; set; }
-        protected int gold { get; set; }
-        protected bool isDead => curHealthPoint <= 0;
+        public int level { get; protected set; }
+        public string name { get; protected set; }
+        public string job { get; protected set; }
+        public int attackPower { get; protected set; }
+        public int defense { get; protected set; }
+        public int maxHealthPoint { get; protected set; }
+        public int curHealthPoint { get; protected set; }
+        public int maxManaPoint { get; protected set; }
+        public int curManaPoint { get; protected set; }
+        public int gold { get; protected set; }
+        public bool isDead => curHealthPoint <= 0;
 
         public int TakeDamage(int damage)
         {
