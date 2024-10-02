@@ -44,7 +44,7 @@ namespace Roronoa_TXT_RPG
         }
 
         
-        public override void PrintCharactorInfo()
+        public override void PrintCharacterInfo()
         {
             Console.WriteLine("[내정보]");
             Console.WriteLine($"Lv.{level} {name} {job}");
@@ -89,11 +89,16 @@ namespace Roronoa_TXT_RPG
 
         }
     }
-    internal class Worrior : Player
-    {                    
-        internal Worrior()
+    internal class Warrior : Player
+    {
+        public Warrior()
         {
-            name = "Yaman";
+        }
+
+        internal Warrior(string inputName)
+        {
+            job = "Warrior";
+            name = inputName;
             attackPower = 20;
             defense = 10;
         }
@@ -106,9 +111,10 @@ namespace Roronoa_TXT_RPG
     }
     internal class Wizard : Player
     {
-        internal Wizard()
+        internal Wizard(string inputName)
         {
-            name = "Zud";
+            job = "Wizard";
+            name = inputName;
             attackPower = 23;
             defense = 8;
         }
@@ -119,9 +125,10 @@ namespace Roronoa_TXT_RPG
     }
     internal class Assassin : Player
     {
-        internal Assassin()
+        internal Assassin(string inputName)
         {
-            name = "sin";
+            job = "Assassin";
+            name = inputName;
             attackPower = 25;
             defense = 7;
         }

@@ -11,7 +11,7 @@ namespace Roronoa_TXT_RPG
         static void Main(string[] args)
         {
             Init();
-            
+       
             while (isRunGame)
             {
                 Console.Clear();
@@ -21,10 +21,37 @@ namespace Roronoa_TXT_RPG
 
         static void Init()
         {
+            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+            Console.WriteLine("원하시는 이름을 설정해주세요.");
+            Console.Write($">>"); string name = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine($"반갑습니다, {name}님!");
+
+            Console.WriteLine("직업에 해당하는 숫자를 입력하세요.");
+            Console.WriteLine("1.Warrior 2.Wizard 3.Assassin");
+            int choice = int.Parse(Console.ReadLine());
+
+            switch(choice)
+            {
+                case 1:
+                    player = new Warrior(name);
+                    break;
+                case 2:
+                    player = new Wizard(name);
+                    break;
+                case 3:
+                    player = new Assassin(name);
+                    break;
+
+                default:
+                    Console.WriteLine("잘못된 선택입니다.");
+                    return;
+            }
+            
             SceneManager.InitSceneManager();
             EventManager.InitEventManager();
             QuestManager.InitQuestManager();
-            player = new Wizard();
+            
 
         }
         static void Update()
