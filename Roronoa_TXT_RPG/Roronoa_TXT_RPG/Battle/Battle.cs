@@ -35,7 +35,7 @@ namespace Roronoa_TXT_RPG
             _monsterDeadCount = 0;
             _beforeBattlePlayerHP = Program.player.curHealthPoint;
 
-            monsters = new List<Monster> { new Goblin(), new Goblin(), new Goblin() };
+            monsters = new List<Monster> { new Goblin(1,20, 10, 4), new Goblin(2, 22, 10, 5), new Goblin(2, 23, 10, 4) };
         }
 
 
@@ -108,7 +108,7 @@ namespace Roronoa_TXT_RPG
             //>>
             Console.WriteLine("대상을 선택해주세요.");
             Console.Write(">>");
-            Program.KeyInputCheck(out int _selectTarget, monsters.Count+1);
+            Program.KeyInputCheck(out int _selectTarget, monsters.Count+1, true);
 
             //선택 큐에 넣기
             selectQueue.Enqueue(_selectTarget);
