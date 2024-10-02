@@ -74,41 +74,47 @@ namespace Roronoa_TXT_RPG
         //나오는 선택 => 공격할 몬스터 선택: 1 고블린, 2 오크...(0. 취소)
         internal void SceneSelectAttackTarget()
         {
-            Console.Clear();
-            //Battle!!
-            Console.WriteLine("Battle!!");
-            Console.WriteLine("");
-
-            //1 Lv.2 미니언 HP 15
-            //2 Lv.5 대포미니언 HP 25
-            //3 LV.3 공허충 Dead
-            for (int i = 0; i < monsters.Count; i++)
+            int a = 1;
+            switch (a)
             {
-                int selectNumber = i + 1;
-                Console.Write($"{selectNumber} ");
-                monsters[i].PrintCharactorInfo();
+                case 0:
+                    Console.Clear();
+                    //Battle!!
+                    Console.WriteLine("Battle!!");
+                    Console.WriteLine("");
+
+                    //1 Lv.2 미니언 HP 15
+                    //2 Lv.5 대포미니언 HP 25
+                    //3 LV.3 공허충 Dead
+                    for (int i = 0; i < monsters.Count; i++)
+                    {
+                        int selectNumber = i + 1;
+                        Console.Write($"{selectNumber} ");
+                        monsters[i].PrintCharactorInfo();
+                    }
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+
+                    //[내정보]
+                    //Lv.1  Chad(전사)
+                    //HP 100 / 100
+                    Program.player.PrintCharactorInfo();
+                    Console.WriteLine("");
+
+                    //0.취소
+                    Console.WriteLine("0. 취소");
+                    Console.WriteLine("");
+
+                    //대상을 선택해주세요.
+                    //>>
+                    Console.WriteLine("대상을 선택해주세요.");
+                    Console.Write(">>");
+                    Program.KeyInputCheck(out int _selectTarget, monsters.Count+1);
+
+                    //선택 큐에 넣기
+                    selectQueue.Enqueue(_selectTarget);
+                    break;
             }
-            Console.WriteLine("");
-            Console.WriteLine("");
-
-            //[내정보]
-            //Lv.1  Chad(전사)
-            //HP 100 / 100
-            Program.player.PrintCharactorInfo();
-            Console.WriteLine("");
-
-            //0.취소
-            Console.WriteLine("0. 취소");
-            Console.WriteLine("");
-
-            //대상을 선택해주세요.
-            //>>
-            Console.WriteLine("대상을 선택해주세요.");
-            Console.Write(">>");
-            Program.KeyInputCheck(out int _selectTarget, monsters.Count+1);
-            //선택 큐에 넣기
-            selectQueue.Enqueue(_selectTarget);
-
         }
 
         //완료
@@ -125,7 +131,7 @@ namespace Roronoa_TXT_RPG
             //
             //Lv.3 공허충
             //HP 10->Dead
-            BattlePlayerAction(selectQueue, monsters);
+            Program.player.BattlePlayerAction(selectQueue, monsters);
 
             //0.다음
             Console.WriteLine("0. 다음");

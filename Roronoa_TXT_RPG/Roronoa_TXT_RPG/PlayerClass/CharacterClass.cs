@@ -58,7 +58,7 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
+        public virtual void PrintCharactorInfo(int beforeBattlePlayerHealthPoint)
         {
             if(curHealthPoint > 0)
             {

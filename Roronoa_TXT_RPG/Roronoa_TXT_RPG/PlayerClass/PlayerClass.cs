@@ -67,7 +67,7 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($"");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.WriteLine(">>");
+            Console.Write(">>");
 
             Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length);
 
