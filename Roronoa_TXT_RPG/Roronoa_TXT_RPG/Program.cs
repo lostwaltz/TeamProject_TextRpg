@@ -51,7 +51,7 @@ namespace Roronoa_TXT_RPG
             SceneManager.InitSceneManager();
             EventManager.InitEventManager();
             QuestManager.InitQuestManager();
-            player = new Wizard();
+            
 
         }
         static void Update()

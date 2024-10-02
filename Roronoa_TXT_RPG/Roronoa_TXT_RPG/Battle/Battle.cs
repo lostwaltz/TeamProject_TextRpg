@@ -50,7 +50,7 @@ namespace Roronoa_TXT_RPG
             //LV.3 공허충 HP 10
             for (int i = 0; i < monsters.Count; i++)
             {
-                monsters[i].PrintCharactorInfo();
+                monsters[i].PrintCharacterInfo();
             }
             Console.WriteLine("");
             Console.WriteLine("");
@@ -58,7 +58,7 @@ namespace Roronoa_TXT_RPG
             //[내정보]
             //Lv.1  Chad(전사)
             //HP 100 / 100
-            Program.player.PrintCharactorInfo();
+            Program.player.PrintCharacterInfo();
             Console.WriteLine("");
 
             //1. 공격 
@@ -86,7 +86,7 @@ namespace Roronoa_TXT_RPG
             {
                 int selectNumber = i + 1;
                 Console.Write($"{selectNumber} ");
-                monsters[i].PrintCharactorInfo();
+                monsters[i].PrintCharacterInfo();
             }
             Console.WriteLine("");
             Console.WriteLine("");
@@ -94,7 +94,7 @@ namespace Roronoa_TXT_RPG
             //[내정보]
             //Lv.1  Chad(전사)
             //HP 100 / 100
-            Program.player.PrintCharactorInfo();
+            Program.player.PrintCharacterInfo();
             Console.WriteLine("");
 
             //0.취소
@@ -214,7 +214,7 @@ namespace Roronoa_TXT_RPG
 
                 //Lv.1 Chad
                 //HP 100-> 74
-                Program.player.PrintCharactorInfo(_beforeBattlePlayerHP);
+                Program.player.PrintCharacterInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
 
                 //0.다음
@@ -239,7 +239,7 @@ namespace Roronoa_TXT_RPG
 
                 //Lv.1 Chad
                 //HP 100-> 0
-                Program.player.PrintCharactorInfo(_beforeBattlePlayerHP);
+                Program.player.PrintCharacterInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
 
                 //0.다음
