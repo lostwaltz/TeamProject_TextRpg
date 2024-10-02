@@ -23,6 +23,7 @@ namespace Roronoa_TXT_RPG
             if (_battle.LastSelect() != 0)
             {
                 _battle.ScenePlayerAttackResult();
+                _battle.DequeueSelection();
                 _battle.SceneIsBattleResult(); 
                 if (_battle.LastSelect() != 0)
                 {
