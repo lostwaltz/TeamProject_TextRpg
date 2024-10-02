@@ -38,6 +38,7 @@ namespace Roronoa_TXT_RPG
             }
             if (_battle.DequeueSelection() == 0)
             {
+                //Program.stage.StageUp();
                 SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
             }
         }

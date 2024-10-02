@@ -28,9 +28,9 @@ namespace Roronoa_TXT_RPG
         */
         internal class Goblin : Monster
         {
-            public Goblin()
+            internal Goblin()
             {
-                
+
             }
 
             public void Randomstatus()
