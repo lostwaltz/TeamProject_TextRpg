@@ -2,7 +2,7 @@
 namespace Roronoa_TXT_RPG
 {
     internal class Character
-	{
+    {
         public int level { get; protected set; }
         public string name { get; protected set; }
         public string job { get; protected set; }
@@ -33,7 +33,7 @@ namespace Roronoa_TXT_RPG
         public int TakeDamage(int damage)
         {
             int _takeDamageHealthPoint = curHealthPoint - damage;
-            if(_takeDamageHealthPoint < 0)
+            if (_takeDamageHealthPoint < 0)
             {
                 Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {_takeDamageHealthPoint}");
             }
@@ -53,25 +53,25 @@ namespace Roronoa_TXT_RPG
             opponent.TakeDamage(damage);
         }
 
-        public virtual void PrintCharactorInfo()    
+        public virtual void PrintCharactorInfo()
         {
 
         }
 
-        public virtual void PrintCharactorInfo(int beforeBattlePlayerHealthPoint)
+        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
         {
-            if(curHealthPoint > 0)
+            if (curHealthPoint > 0)
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
+                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> {curHealthPoint}");
             }
             else
             {
                 Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
+                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> Dead");
             }
         }
-	}
-    
+    }
+
 }
 
