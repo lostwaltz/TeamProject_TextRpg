@@ -15,6 +15,21 @@ namespace Roronoa_TXT_RPG
         public int gold { get; protected set; }
         public bool isDead => curHealthPoint <= 0;
 
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"Lv.{level}");
+            Console.WriteLine($"{name} ({job})");
+            Console.WriteLine($"공격력: {attackPower}");
+            Console.WriteLine($"방어력: {defense}");
+            Console.WriteLine($"체력: {curHealthPoint}/{maxHealthPoint}");
+            Console.WriteLine($"Gold: {gold}G");
+            Console.WriteLine($" ");
+            Console.WriteLine($"0.나가기");
+            Console.WriteLine($" ");
+            Console.WriteLine($"원하시는 행동을 입력해주세요.");
+            Console.WriteLine($">>");
+        }
+
         public int TakeDamage(int damage)
         {
             int _takeDamageHealthPoint = curHealthPoint - damage;
