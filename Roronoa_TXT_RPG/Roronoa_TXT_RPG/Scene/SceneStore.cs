@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Roronoa_TXT_RPG.Manager;
 
 namespace Roronoa_TXT_RPG
 {
