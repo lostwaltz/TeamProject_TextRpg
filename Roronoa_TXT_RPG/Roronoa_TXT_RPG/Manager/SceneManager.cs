@@ -10,7 +10,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Roronoa_TXT_RPG
 {
-    enum SCENE_TYPE { SCENE_LOBY, SCENE_STATUS, SCENE_BATTLE, SCENE_QUEST, SCENE_END }
+    enum SCENE_TYPE { SCENE_LOBY, SCENE_STATUS, SCENE_BATTLE, SCENE_QUEST, SCENE_STORE, SCENE_END }
 
     class SceneManager
     {
@@ -28,6 +28,7 @@ namespace Roronoa_TXT_RPG
                 instance._sceneList[(int)SCENE_TYPE.SCENE_STATUS] = new SceneStatus();
                 instance._sceneList[(int)SCENE_TYPE.SCENE_BATTLE] = new SceneBattle();
                 instance._sceneList[(int)SCENE_TYPE.SCENE_QUEST] = new SceneQuest();
+                instance._sceneList[(int)SCENE_TYPE.SCENE_STORE] = new SceneStore();
 
                 instance.SceneChange(SCENE_TYPE.SCENE_LOBY);
             }

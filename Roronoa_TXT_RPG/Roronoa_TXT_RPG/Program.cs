@@ -7,6 +7,7 @@ namespace Roronoa_TXT_RPG
         public static Player player = new Player();
         public static Stage stage = new Stage();
 
+
         private static bool isRunGame = true;
 
         static void Main(string[] args)
@@ -52,7 +53,7 @@ namespace Roronoa_TXT_RPG
             SceneManager.InitSceneManager();
             EventManager.InitEventManager();
             QuestManager.InitQuestManager();
-            
+            ItemManager.InitItemManager();
 
         }
         static void Update()

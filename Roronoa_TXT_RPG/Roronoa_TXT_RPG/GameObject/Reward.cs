@@ -12,7 +12,7 @@ namespace Roronoa_TXT_RPG
         void PrintReward();
     }
 
-    public class RewardItem : IReward
+    internal class RewardItem : IReward
     {
         public RewardItem(List<Item> inputItemList)
         {
