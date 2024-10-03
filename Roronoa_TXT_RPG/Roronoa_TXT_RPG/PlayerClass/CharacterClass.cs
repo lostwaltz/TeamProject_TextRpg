@@ -2,11 +2,12 @@
 namespace Roronoa_TXT_RPG
 {
     internal class Character
-    {
+	{
         public int level { get; protected set; }
         public string name { get; protected set; }
         public string job { get; protected set; }
         public int attackPower { get; protected set; }
+        public int skillPower { get; set; }
         public int defense { get; protected set; }
         public int maxHealthPoint { get; protected set; }
         public int curHealthPoint { get; protected set; }
@@ -24,10 +25,18 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($"체력: {curHealthPoint}/{maxHealthPoint}");
             Console.WriteLine($"Gold: {gold}G");
             Console.WriteLine($" ");
-            Console.WriteLine($"0.나가기");
+            Console.WriteLine($"0. 나가기");
             Console.WriteLine($" ");
             Console.WriteLine($"원하시는 행동을 입력해주세요.");
-            Console.WriteLine($">>");
+            Console.Write($">>");
+
+            Program.KeyInputCheck(out int input,0) ;
+            if (input == 0)
+            {
+                SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
+                return;
+            }
+
         }
 
         public void SetDefense(int inputDefense)
@@ -39,49 +48,63 @@ namespace Roronoa_TXT_RPG
         {
             curHealthPoint = inputCurHealthPoint;
         }
-
-        public int TakeDamage(int damage)
+        public void TakeDamage(int damage)
         {
-            int _takeDamageHealthPoint = curHealthPoint - damage;
-            if (_takeDamageHealthPoint < 0)
+            int trueDamage = damage - defense;
+            if (trueDamage < 0)
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받아 사망했습니다. 현재체력: {_takeDamageHealthPoint}");
+                trueDamage = 0;
+            }
+            int _takeDamageHealthPoint = curHealthPoint - (trueDamage);
+            if ((curHealthPoint - (trueDamage)) > maxHealthPoint)
+            {
+                _takeDamageHealthPoint = maxHealthPoint;
+            }
+            
+            if(_takeDamageHealthPoint < 0)
+            {
+                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
+                    $"HP {curHealthPoint} -> Dead");
+                Console.WriteLine();
             }
             else
             {
-                Console.WriteLine($"{name}이(가){damage}만큼 데미지를 받았습니다. 현재체력: {_takeDamageHealthPoint}");
+                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}이(가) {trueDamage}만큼 데미지를 받았습니다. " +
+                    $"HP {curHealthPoint} -> {_takeDamageHealthPoint}");
+                Console.WriteLine();
             }
             curHealthPoint = _takeDamageHealthPoint;
-            return curHealthPoint;
         }
 
         public void AttackOpponent(Character opponent, int damage)
         {
             Console.WriteLine($"{name}의 공격!");
-            Console.WriteLine($"{opponent}을(를) 공격했습니다. [데미지: {damage}]");
+            Console.WriteLine($"{opponent.name}을(를) 공격했습니다. [데미지: {damage}]");
 
             opponent.TakeDamage(damage);
         }
 
-        public virtual void PrintCharactorInfo()
+        public virtual void PrintCharacterInfo()    
         {
 
         }
 
-        public virtual void PrintCharactorInfo(int befireBattlePlayerHealthPoint)
+        public virtual void PrintCharacterInfo(int beforeBattlePlayerHealthPoint)
         {
-            if (curHealthPoint > 0)
+            if(curHealthPoint > 0)
             {
-                Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> {curHealthPoint}");
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
             }
             else
             {
-                Console.WriteLine($"{level} {name}");
-                Console.WriteLine($"HP {befireBattlePlayerHealthPoint}-> Dead");
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
             }
         }
-    }
-
+	}
+    
 }
 

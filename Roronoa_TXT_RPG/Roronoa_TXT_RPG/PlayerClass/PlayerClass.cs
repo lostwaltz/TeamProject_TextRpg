@@ -44,7 +44,7 @@ namespace Roronoa_TXT_RPG
         }
 
         
-        public override void PrintCharactorInfo()
+        public override void PrintCharacterInfo()
         {
             Console.WriteLine("[내정보]");
             Console.WriteLine($"Lv.{level} {name} {job}");
@@ -62,14 +62,14 @@ namespace Roronoa_TXT_RPG
             for(int i = 0; i < battlePlayerSelectType.Length; i++)
             {
                 int playerSelectNum = i + 1;
-                Console.WriteLine($"{playerSelectNum}.{battlePlayerSelectType[i]}");
+                Console.WriteLine($"{playerSelectNum}. {battlePlayerSelectType[i]}");
             }
             Console.WriteLine($"");
-
+            Console.WriteLine($"0. 도망");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.WriteLine(">>");
+            Console.Write(">>");
 
-            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length);
+            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length, true);
 
             selectQueue.Enqueue(_selectPlayerAction);
         }
@@ -81,7 +81,7 @@ namespace Roronoa_TXT_RPG
             switch(playerAction)
             {
                 case PLAYER_ACTION_TYPE.ATTACK:
-                int selectMonster = selectQueue.Dequeue();
+                int selectMonster = selectQueue.Dequeue() - 1;//입력받은 선택지 - 1
                     AttackOpponent(monstersList[selectMonster], attackPower);
                     break;
             }
@@ -89,11 +89,16 @@ namespace Roronoa_TXT_RPG
 
         }
     }
-    internal class Worrior : Player
-    {                    
-        internal Worrior()
+    internal class Warrior : Player
+    {
+        public Warrior()
         {
-            name = "Yaman";
+        }
+
+        internal Warrior(string inputName)
+        {
+            job = "Warrior";
+            name = inputName;
             attackPower = 20;
             defense = 10;
         }
@@ -106,9 +111,10 @@ namespace Roronoa_TXT_RPG
     }
     internal class Wizard : Player
     {
-        internal Wizard()
+        internal Wizard(string inputName)
         {
-            name = "Zud";
+            job = "Wizard";
+            name = inputName;
             attackPower = 23;
             defense = 8;
         }
@@ -119,9 +125,10 @@ namespace Roronoa_TXT_RPG
     }
     internal class Assassin : Player
     {
-        internal Assassin()
+        internal Assassin(string inputName)
         {
-            name = "sin";
+            job = "Assassin";
+            name = inputName;
             attackPower = 25;
             defense = 7;
         }
