@@ -91,6 +91,13 @@ namespace Roronoa_TXT_RPG
              
 
         }
+
+
+        public void EquipItem(Item item)
+        {
+            
+        }
+
     }
     internal class Warrior : Player
     {
