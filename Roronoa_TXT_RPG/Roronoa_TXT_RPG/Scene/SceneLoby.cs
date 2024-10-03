@@ -17,7 +17,9 @@ namespace Roronoa_TXT_RPG
                 "이제 전투를 시작할 수 있습니다.\n\n" +
                 "1. 상태 보기\n" +
                 "2. 전투 시작\n" +
-                "3. 퀘스트 보기\n\n" +
+                "3. 퀘스트 보기\n" +
+                "4. 상점\n" +
+                "\n" +
                 "원하시는 행동을 입력해주세요.\n>> ");
 
             Program.KeyInputCheck(out int number, 10);
@@ -32,6 +34,9 @@ namespace Roronoa_TXT_RPG
                     break;
                 case SCENE_TYPE.SCENE_QUEST:
                     SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_QUEST);
+                    break;
+                case SCENE_TYPE.SCENE_STORE:
+                    SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_STORE);
                     break;
             }
         }

@@ -21,32 +21,6 @@ namespace Roronoa_TXT_RPG
 
         }
 
-        public void DisplayInfo()
-        {
-            Console.WriteLine($"Lv.{level}");
-            Console.WriteLine($"{name} ({job})");
-            Console.WriteLine($"공격력: {attackPower}");
-            Console.WriteLine($"방어력: {defense}");
-            Console.WriteLine($"체력: {curHealthPoint}/{maxHealthPoint}");
-            Console.WriteLine($"Gold: {gold}G");
-            Console.WriteLine($" ");
-            //>>아이템 장착
-
-            Console.WriteLine($" ");
-            Console.WriteLine($"0. 나가기");
-            Console.WriteLine($" ");
-            Console.WriteLine($"원하시는 행동을 입력해주세요.");
-            Console.Write($">>");
-
-            Program.KeyInputCheck(out int input,0) ;
-            if (input == 0)
-            {
-                SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
-                return;
-            }
-
-        }
-
         public void SetDefense(int inputDefense)
         {
             defense = inputDefense;
@@ -71,7 +45,7 @@ namespace Roronoa_TXT_RPG
             
             if(_takeDamageHealthPoint <= 0)
             {
-                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}의 방어! [방어력: {defense}]");
                 Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
                     $"HP {curHealthPoint} -> Dead");
                 Console.WriteLine();
@@ -81,7 +55,7 @@ namespace Roronoa_TXT_RPG
             }
             else
             {
-                Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} {name}의 방어! [방어력: {defense}]");
                 Console.WriteLine($"Lv.{level} {name}이(가) {trueDamage}만큼 데미지를 받았습니다. " +
                     $"HP {curHealthPoint} -> {_takeDamageHealthPoint}");
                 Console.WriteLine();

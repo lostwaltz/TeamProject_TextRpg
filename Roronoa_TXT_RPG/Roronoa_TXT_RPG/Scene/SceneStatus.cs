@@ -8,13 +8,14 @@ namespace Roronoa_TXT_RPG
 {
     internal class SceneStatus : Scene
     {
+        Queue<int> selectQueue = new Queue<int>();
         public SceneStatus()
         {
         }
 
         public override void SceneUpdate()
         {
-            Program.player.DisplayInfo();
+            Program.player.DisplayStatusAndItemInfo();
         }
     }
 }

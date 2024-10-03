@@ -14,7 +14,7 @@ namespace Roronoa_TXT_RPG
         public override void SceneUpdate()
         {
             
-            ItemManager.instance?.PrintStore(STORE_ACTION_TYPE.WATCH);
+            ItemManager.instance?.PrintStore();
 
         }
     }
