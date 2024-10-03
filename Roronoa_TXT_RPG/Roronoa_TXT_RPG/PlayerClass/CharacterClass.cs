@@ -30,6 +30,16 @@ namespace Roronoa_TXT_RPG
             Console.WriteLine($">>");
         }
 
+        public void SetDefense(int inputDefense)
+        {
+            defense = inputDefense;
+        }
+
+        public void SetCurHealthPoint(int inputCurHealthPoint)
+        {
+            curHealthPoint = inputCurHealthPoint;
+        }
+
         public int TakeDamage(int damage)
         {
             int _takeDamageHealthPoint = curHealthPoint - damage;
