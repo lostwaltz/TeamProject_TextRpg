@@ -140,15 +140,9 @@ namespace Roronoa_TXT_RPG
 
     internal class Goblin : Monster
     {
-        public Goblin(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
+        public Goblin()
         {
-            level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
-            attackPower = randomAttackPower;
+            Randomstatus();
 
             name = "고블린";
 
@@ -173,14 +167,9 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(5, 20);
 
             int randomAttackPower = random.Next(15, 20);
-        }
 
+            int randomDefense = random.Next(4, 8);
 
-    }
-    internal class Elf : Monster
-    {
-        public Elf(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-        {
             level = randomLevel;
 
             curHealthPoint = randomHealthPoint;
@@ -188,6 +177,15 @@ namespace Roronoa_TXT_RPG
             curManaPoint = randomManaPoint;
 
             attackPower = randomAttackPower;
+
+            defense = randomDefense;
+        }
+    }
+    internal class Elf : Monster
+    {
+        public Elf()
+        {
+            Randomstatus();
 
             name = "엘프";
 
@@ -211,12 +209,9 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(100, 150);
 
             int randomAttackPower = random.Next(30, 50);
-        }
-    }
-    internal class Orc : Monster
-    {
-        public Orc(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-        {
+
+            int randomDefense = random.Next(8, 12);
+
             level = randomLevel;
 
             curHealthPoint = randomHealthPoint;
@@ -224,6 +219,15 @@ namespace Roronoa_TXT_RPG
             curManaPoint = randomManaPoint;
 
             attackPower = randomAttackPower;
+
+            defense = randomDefense;
+        }
+    }
+    internal class Orc : Monster
+    {
+        public Orc()
+        {
+            Randomstatus();
 
             name = "오크";
 
@@ -244,13 +248,9 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(10, 25);
 
             int randomAttackPower = random.Next(40, 60);
-        }
-    }
 
-    internal class Dragon : Monster
-    {
-        public Dragon(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-        {
+            int randomDefense = random.Next(12, 15);
+
             level = randomLevel;
 
             curHealthPoint = randomHealthPoint;
@@ -258,6 +258,16 @@ namespace Roronoa_TXT_RPG
             curManaPoint = randomManaPoint;
 
             attackPower = randomAttackPower;
+
+            defense = randomDefense;
+        }
+    }
+
+    internal class Dragon : Monster
+    {
+        public Dragon()
+        {
+            Randomstatus();
 
             name = "드래곤";
 
@@ -278,12 +288,9 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(500, 1000);
 
             int randomAttackPower = random.Next(130, 150);
-        }
-    }
-    internal class Slime : Monster
-    {
-        public Slime(int randomLevel, int randomHealthPoint, int randomManaPoint, int randomAttackPower)
-        {
+
+            int randomDefense = random.Next(50, 60);
+
             level = randomLevel;
 
             curHealthPoint = randomHealthPoint;
@@ -291,6 +298,15 @@ namespace Roronoa_TXT_RPG
             curManaPoint = randomManaPoint;
 
             attackPower = randomAttackPower;
+
+            defense = randomDefense;
+        }
+    }
+    internal class Slime : Monster
+    {
+        public Slime()
+        {
+            Randomstatus();
 
             name = "슬라임";
 
@@ -316,6 +332,18 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(0, 0);
 
             int randomAttackPower = random.Next(5, 10);
+
+            int randomDefense = random.Next(1, 3);
+
+            level = randomLevel;
+
+            curHealthPoint = randomHealthPoint;
+
+            curManaPoint = randomManaPoint;
+
+            attackPower = randomAttackPower;
+
+            defense = randomDefense;
         }
     }
 }
