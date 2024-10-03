@@ -105,7 +105,7 @@ namespace Roronoa_TXT_RPG
         public int skillPower;
         public MonsterSkill skill;
 
-        public override void PrintCharactorInfo()
+        public override void PrintCharacterInfo()
         {
             if (curHealthPoint > 0)
             {
@@ -360,7 +360,7 @@ namespace Roronoa_TXT_RPG
             }
 
 
-            skill = new Elf();
+            skill = new ElfSkill(this);
         }
 
         public void Randomstatus()
