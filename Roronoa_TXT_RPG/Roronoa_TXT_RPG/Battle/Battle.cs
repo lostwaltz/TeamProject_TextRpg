@@ -60,7 +60,8 @@ namespace Roronoa_TXT_RPG
             //HP 100 / 100
             Program.player.PrintCharacterInfo();
             Console.WriteLine("");
-
+            Console.WriteLine("");
+            Console.WriteLine("");
             //1. 공격 
             //2. ...
             //원하시는 행동을 입력해주세요.
@@ -82,7 +83,7 @@ namespace Roronoa_TXT_RPG
             for (int i = 0; i < monsters.Count; i++)
             {
                 int selectNumber = i + 1;
-                Console.Write($"{selectNumber} ");
+                Console.Write($"{selectNumber}.\t");
                 monsters[i].PrintCharacterInfo();
             }
             Console.WriteLine("");
@@ -93,7 +94,7 @@ namespace Roronoa_TXT_RPG
             //HP 100 / 100
             Program.player.PrintCharacterInfo();
             Console.WriteLine("");
-
+            Console.WriteLine("");
             Console.WriteLine("0. 취소");
             Console.WriteLine("");
             Console.WriteLine("대상을 선택해주세요.");
@@ -128,7 +129,7 @@ namespace Roronoa_TXT_RPG
             //Lv.3 공허충
             //HP 10->Dead
             Program.player.BattlePlayerAction(selectQueue, monsters);
-
+            Console.WriteLine("");
             Console.WriteLine("0. 다음");
             Console.WriteLine("");
             Console.Write(">>");
@@ -179,6 +180,7 @@ namespace Roronoa_TXT_RPG
                 isVictory = false;
             }
 
+            Console.WriteLine("");
             Console.WriteLine("0. 다음");
             Console.WriteLine("");
             Console.Write(">>");
@@ -206,7 +208,7 @@ namespace Roronoa_TXT_RPG
                 //HP 100-> 74
                 Program.player.PrintCharacterInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
-
+                Console.WriteLine("");
                 Console.WriteLine("0. 다음");
                 Console.WriteLine("");
                 Console.Write(">>");
@@ -221,11 +223,12 @@ namespace Roronoa_TXT_RPG
                 Console.WriteLine("You Lose");
                 Console.WriteLine("");
                 Program.stage.PrintStage(); Console.WriteLine(" Fail!");
+                Console.WriteLine("");
                 //Lv.1 Chad
                 //HP 100-> 0
                 Program.player.PrintCharacterInfo(_beforeBattlePlayerHP);
                 Console.WriteLine("");
-
+                Console.WriteLine("");
                 Console.WriteLine("0. 다음");
                 Console.WriteLine("");
                 Console.Write(">>");

@@ -109,7 +109,7 @@ namespace Roronoa_TXT_RPG
         {
             if (curHealthPoint > 0)
             {
-                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} HP {curHealthPoint,-5} MP {curManaPoint}");
+                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} HP {curHealthPoint,-4} MP {curManaPoint, -4} ATK {attackPower, -3} DEF {defense, -3}");
             }
             else
             {

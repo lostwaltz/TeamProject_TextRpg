@@ -83,7 +83,7 @@ namespace Roronoa_TXT_RPG
         {
             Console.WriteLine($"{name}의 공격!");
             Console.WriteLine($"{opponent.name}을(를) 공격했습니다. [데미지: {damage}]");
-
+            Console.WriteLine();
             opponent.TakeDamage(damage);
         }
 

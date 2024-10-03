@@ -29,14 +29,14 @@ namespace Roronoa_TXT_RPG
            gold = 0;
         }
             
-            public void Attack()
-            {
-                Console.WriteLine("공격했습니다.");
-            }
-            public void Skill()
-            {
-                Console.WriteLine("스킬을 사용했습니다.");
-            } 
+        public void Attack()
+        {
+            Console.WriteLine("공격했습니다.");
+        }
+        public void Skill()
+        {
+            Console.WriteLine("스킬을 사용했습니다.");
+        } 
 
         public void AddGold(int getGold)
         {
@@ -46,9 +46,12 @@ namespace Roronoa_TXT_RPG
         
         public override void PrintCharacterInfo()
         {
-            Console.WriteLine("[내정보]");
+            Console.WriteLine("  [내정보]");
+            Console.WriteLine();
             Console.WriteLine($"Lv.{level} {name} {job}");
-            Console.WriteLine($"HP: {curHealthPoint}/{maxHealthPoint}");
+            Console.WriteLine();
+            Console.WriteLine($" HP  {curHealthPoint}/{maxHealthPoint}".PadRight(17) + $"MP  {curManaPoint}/{maxManaPoint}");
+            Console.WriteLine($" ATK {attackPower}".PadRight(17) + $"DEF {defense}");
         }
        
 
@@ -56,16 +59,16 @@ namespace Roronoa_TXT_RPG
 
        public void BattlePlayerSelect(Queue<int> selectQueue)
         {
-            Attack();
-            Skill();
-
-            for(int i = 0; i < battlePlayerSelectType.Length; i++)
+            Console.WriteLine("무엇을 하시겠습니까?");
+            Console.WriteLine("");
+            for (int i = 0; i < battlePlayerSelectType.Length; i++)
             {
                 int playerSelectNum = i + 1;
                 Console.WriteLine($"{playerSelectNum}. {battlePlayerSelectType[i]}");
             }
-            Console.WriteLine($"");
+            Console.WriteLine("");
             Console.WriteLine($"0. 도망");
+            Console.WriteLine("");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
