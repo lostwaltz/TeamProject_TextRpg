@@ -8,8 +8,6 @@ using static Roronoa_TXT_RPG.Monster;
 
 namespace Roronoa_TXT_RPG
 {
-    public enum MonsterType { GOBLIN, ELF, ORC, DREGPN, SLAIM }
-
     internal class GoblinSkill : MonsterSkill
     {
         internal GoblinSkill(Monster InputMonster) : base(InputMonster)
@@ -84,7 +82,7 @@ namespace Roronoa_TXT_RPG
     {
         internal SlaimSkill(Monster InputMonster) : base(InputMonster)
         {
-
+            
         }
 
         public override void MonsterSkillInvocation()
@@ -288,6 +286,11 @@ namespace Roronoa_TXT_RPG
 
                 int randomAttackPower = random.Next(5, 10);
             }
+
+            public override void OnDie()
+            {
+
+            }
         }
     }
     internal abstract class MonsterSkill
@@ -466,6 +469,7 @@ namespace Roronoa_TXT_RPG
             {
                 name = "킹슬라임";
             }
+
         }
 
         public void Randomstatus()
@@ -479,6 +483,11 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(0, 0);
 
             int randomAttackPower = random.Next(5, 10);
+        }
+
+        public override void OnDie()
+        {
+            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MONSTER_TYPE.SLIME));
         }
     }
 }

@@ -45,7 +45,17 @@ namespace Roronoa_TXT_RPG
         }
         public void ApplyReward(IDummyPlayerInterface playerInterface)
         {
-            for(int i = 0; i < QuestData.IRewardList.Count; i++)
+            EventManager.instance?.Unsubscribe<MonsterKillEventArgs>((monsterType) =>
+            {
+                if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
+                {
+                    QuestStruct tempData = QuestData;
+                    tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                    QuestData = tempData;
+                }
+            });
+
+            for (int i = 0; i < QuestData.IRewardList.Count; i++)
             {
                 QuestData.IRewardList[i].GiveReward(playerInterface);
             }
@@ -56,6 +66,19 @@ namespace Roronoa_TXT_RPG
             return QuestData.CurValue >= QuestData.TargetValue;
         }
 
+        public void SubscribeSlimeQuest()
+        {
+            EventManager.instance?.Subscribe<MonsterKillEventArgs>((monsterType) =>
+            {
+                if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
+                {
+                    QuestStruct tempData = QuestData;
+                    tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                    QuestData = tempData;
+                }
+            });
+        }
+
         private void CreateQuestPreset(string presetName)
         {
             QuestStruct tempData = QuestData;
@@ -63,12 +86,12 @@ namespace Roronoa_TXT_RPG
 
             switch (presetName)
             {
-                case "마을을 위협하는 미니언 처치":
+                case "마을을 위협하는 슬라임 처치":
                     tempData.Title = new StringBuilder(presetName);
-                    tempData.Story = new StringBuilder("이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\n마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해주게!");
-                    tempData.Progress = new StringBuilder("- 미니언 5마리 처치");
+                    tempData.Story = new StringBuilder("이봐! 마을 근처에 슬라임들이 너무 많아졌다고 생각하지 않나?\n마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해주게!");
+                    tempData.Progress = new StringBuilder("- 슬라임 5마리 처치");
 
-                    tempData.CurValue = 5;
+                    tempData.CurValue = 0;
                     tempData.TargetValue = 5;
 
                     tempData.IRewardList = new List<IReward>();
@@ -78,15 +101,7 @@ namespace Roronoa_TXT_RPG
                     if(null != iReward)
                         tempData.IRewardList.Add(iReward);
 
-                    EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterType) =>
-                    {
-                        if (MonsterEventType.END == MonsterType.MonsterType)
-                        {
-                            QuestStruct tempData = QuestData;
-                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
-                            QuestData = tempData;
-                        }
-                    });
+                    
                     break;
                 case "장비를 장착 해보기":
                     tempData.Title = new StringBuilder(presetName);
@@ -101,16 +116,9 @@ namespace Roronoa_TXT_RPG
                     itemList.Add(new Item("청동 도끼"));
 
                     tempData.IRewardList.Add(new RewardItem(itemList));
+                    
 
-                    EventManager.instance?.Subscribe<MonsterKillEventArgs>((MonsterType) =>
-                    {
-                        if (MonsterEventType.GOBLIN == MonsterType.MonsterType)
-                        {
-                            QuestStruct tempData = QuestData;
-                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
-                            QuestData = tempData;
-                        }
-                    });
+
                     break;
             }
 

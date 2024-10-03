@@ -30,9 +30,8 @@ namespace Roronoa_TXT_RPG
             {
                 instance = new QuestManager();
 
-                instance.questPairList.Add(new QuestPair(new Quest("마을을 위협하는 미니언 처치")));
+                instance.questPairList.Add(new QuestPair(new Quest("마을을 위협하는 슬라임 처치")));
                 instance.questPairList.Add(new QuestPair(new Quest("장비를 장착 해보기")));
-                
             }
         }
 
@@ -81,7 +80,16 @@ namespace Roronoa_TXT_RPG
                 Program.KeyInputCheck(out int selectNumber, 1);
 
                 if (1 == selectNumber)
+                {
                     pair.isSelect = true;
+
+                    switch(pair.quest.QuestData.Title.ToString())
+                    {
+                        case "마을을 위협하는 슬라임 처치":
+                            pair.quest.SubscribeSlimeQuest();
+                            break;
+                    }
+                }
                 else if (0 == selectNumber)
                     return;
             }

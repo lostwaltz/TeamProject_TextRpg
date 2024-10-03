@@ -8,14 +8,12 @@ namespace Roronoa_TXT_RPG
 {
     internal class MonsterKillEventArgs : EventArgs
     {
-        public enum MonsterEventType { GOBLIN, END };
-
-        public MonsterKillEventArgs(MonsterEventType monsterType)
+        public MonsterKillEventArgs(MONSTER_TYPE monsterType)
         {
             MonsterType = monsterType;
         }
         
-        public MonsterEventType MonsterType { get; set; }
+        public MONSTER_TYPE MonsterType { get; set; }
     }
 
     internal class MonsterDamageEventArgs : EventArgs

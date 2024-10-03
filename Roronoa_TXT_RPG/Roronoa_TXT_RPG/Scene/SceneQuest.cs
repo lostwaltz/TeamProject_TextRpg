@@ -20,7 +20,7 @@ namespace Roronoa_TXT_RPG
 
             QuestManager.instance.ShowQuestList();
 
-            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MonsterEventType.GOBLIN));
+            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MONSTER_TYPE.GOBLIN));
 
             Console.Write("0. 나가기\n\n원하시는 퀘스트를 선택해주세요.\n" + ">> ");
 

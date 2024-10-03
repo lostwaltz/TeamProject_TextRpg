@@ -16,6 +16,11 @@ namespace Roronoa_TXT_RPG
         public int gold { get; protected set; }
         public bool isDead => curHealthPoint <= 0;
 
+        public virtual void OnDie()
+        {
+
+        }
+
         public void DisplayInfo()
         {
             Console.WriteLine($"Lv.{level}");
@@ -67,6 +72,8 @@ namespace Roronoa_TXT_RPG
                 Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
                     $"HP {curHealthPoint} -> Dead");
                 Console.WriteLine();
+
+                this.OnDie();
             }
             else
             {
