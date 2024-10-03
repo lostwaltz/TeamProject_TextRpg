@@ -171,13 +171,11 @@ namespace Roronoa_TXT_RPG
             int randomDefense = random.Next(4, 8);
 
             level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
-
             defense = randomDefense;
         }
     }
@@ -203,23 +201,17 @@ namespace Roronoa_TXT_RPG
             Random random = new Random();
 
             int randomLevel = random.Next(3, 6);
-
             int randomHealthPoint = random.Next(80, 120);
-
             int randomManaPoint = random.Next(100, 150);
-
             int randomAttackPower = random.Next(30, 50);
-
             int randomDefense = random.Next(8, 12);
 
             level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
-
             defense = randomDefense;
         }
     }
@@ -242,23 +234,17 @@ namespace Roronoa_TXT_RPG
             Random random = new Random();
 
             int randomLevel = random.Next(3, 8);
-
             int randomHealthPoint = random.Next(130, 150);
-
             int randomManaPoint = random.Next(10, 25);
-
             int randomAttackPower = random.Next(40, 60);
-
             int randomDefense = random.Next(12, 15);
 
             level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
-
             defense = randomDefense;
         }
     }
@@ -282,23 +268,17 @@ namespace Roronoa_TXT_RPG
             Random random = new Random();
 
             int randomLevel = random.Next(18, 20);
-
             int randomHealthPoint = random.Next(1500, 1800);
-
             int randomManaPoint = random.Next(500, 1000);
-
             int randomAttackPower = random.Next(130, 150);
-
             int randomDefense = random.Next(50, 60);
 
             level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
-
             defense = randomDefense;
         }
     }
@@ -326,23 +306,17 @@ namespace Roronoa_TXT_RPG
             Random random = new Random();
 
             int randomLevel = random.Next(1, 2);
-
             int randomHealthPoint = random.Next(10, 30);
-
             int randomManaPoint = random.Next(0, 0);
-
             int randomAttackPower = random.Next(5, 10);
-
             int randomDefense = random.Next(1, 3);
 
             level = randomLevel;
-
-            curHealthPoint = randomHealthPoint;
-
-            curManaPoint = randomManaPoint;
-
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
-
             defense = randomDefense;
         }
     }
