@@ -66,7 +66,7 @@ namespace Roronoa_TXT_RPG
                 _takeDamageHealthPoint = maxHealthPoint;
             }
             
-            if(_takeDamageHealthPoint < 0)
+            if(_takeDamageHealthPoint <= 0)
             {
                 Console.WriteLine($"Lv.{level} {name}의 방어![방어력: {defense}]");
                 Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
@@ -74,6 +74,7 @@ namespace Roronoa_TXT_RPG
                 Console.WriteLine();
 
                 this.OnDie();
+                _takeDamageHealthPoint = 0;
             }
             else
             {
@@ -89,7 +90,7 @@ namespace Roronoa_TXT_RPG
         {
             Console.WriteLine($"{name}의 공격!");
             Console.WriteLine($"{opponent.name}을(를) 공격했습니다. [데미지: {damage}]");
-
+            Console.WriteLine();
             opponent.TakeDamage(damage);
         }
 
