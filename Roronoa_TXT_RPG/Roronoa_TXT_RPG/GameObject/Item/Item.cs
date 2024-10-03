@@ -28,7 +28,6 @@ namespace Roronoa_TXT_RPG
         public int Stat;
         public int Price;
     }
-
     public class Item
     {
         public Item(string itemName)
@@ -62,8 +61,8 @@ namespace Roronoa_TXT_RPG
 
             stringBuilder.AppendFormat("{0, -4} | ", ItemData.Stat);
 
-            stringBuilder.AppendFormat("{0, " + -totalDescLenght + "} ", ItemData.Description);
-
+            stringBuilder.Append(Program.PadRightForKorean(ItemData.Description.ToString(), ItemData.Description.Length));
+            
             return stringBuilder;
         }
 
