@@ -102,7 +102,8 @@ namespace Roronoa_TXT_RPG
             if (_selectTarget == 0) { }
             else if (monsters[_selectTarget - 1].isDead)//죽은 몬스터 선택 시 
             {
-                do { 
+                do
+                {
                     Console.Write("잘못된 입력입니다.>>");
                     Thread.Sleep(1000);
                     Program.KeyInputCheck(out _selectTarget, monsters.Count, true);
@@ -235,7 +236,7 @@ namespace Roronoa_TXT_RPG
             else { }
         }
 
-        
+
 
 
 
@@ -268,19 +269,19 @@ namespace Roronoa_TXT_RPG
                 switch (monstersTypeList[i])
                 {
                     case MONSTER_TYPE.SLIME:
-                        monsters.Add(new Slime(1, 10, 0, 3));
+                        monsters.Add(new Slime());
                         break;
                     case MONSTER_TYPE.GOBLIN:
-                        monsters.Add(new Goblin(1, 30, 0, 5));
+                        monsters.Add(new Goblin());
                         break;
                     case MONSTER_TYPE.ELF:
-                        monsters.Add(new Elf(1, 50, 0, 7));
+                        monsters.Add(new Elf());
                         break;
                     case MONSTER_TYPE.ORC:
-                        monsters.Add(new Orc(1, 80, 0, 10));
+                        monsters.Add(new Orc());
                         break;
                     case MONSTER_TYPE.DRAGON:
-                        monsters.Add(new Dragon(10, 200, 100, 25));
+                        monsters.Add(new Dragon());
                         break;
                 }
             }
