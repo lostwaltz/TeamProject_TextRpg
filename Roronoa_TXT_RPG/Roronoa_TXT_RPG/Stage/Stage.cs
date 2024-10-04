@@ -36,8 +36,8 @@ namespace Roronoa_TXT_RPG
         //Stage별 몬스터 나올 확률: 순서대로 {몬스터 수, Slime, Goblin, Elf, Orc, Dragon}
         private List<List<int>> probabilityPerStage = new List<List<int>> {
             new List<int>{ 3, 100, 0, 0, 0, 0 },    // Stage 1
-            new List<int>{ 3, 70, 30, 0, 0, 0 },    // Stage 2
-            new List<int>{ 3, 50, 50, 0, 0, 0 },    // Stage 3
+            new List<int>{ 3, 60, 40, 0, 0, 0 },    // Stage 2
+            new List<int>{ 3, 40, 60, 0, 0, 0 },    // Stage 3
             new List<int>{ 3, 20, 80, 0, 0, 0 },    // Stage 4
             new List<int>{ 3, 5, 65, 30, 0, 0 },    // Stage 5
             new List<int>{ 3, 0, 40, 60, 0, 0 },    // Stage 6
@@ -47,33 +47,44 @@ namespace Roronoa_TXT_RPG
             new List<int>{ 1, 0, 0, 0, 0, 100 }     // Stage 10
 
         };
-        
+        List<int> probability = new List<int>();
+        public void probablityCurculate()
+        {
+            probability.Clear();
+            int prob = 0;
+            for (int i = 1; i < probabilityPerStage[level].Count; i++)
+            {
+                prob += probabilityPerStage[level][i];
+                probability.Add(prob);
+            }
+        }
 
 
         public void CreateStageMonsters()
         {
             stageMonsters.Clear();
+            probablityCurculate();
             Random random = new Random();
             for (int i = 0; i < probabilityPerStage[level - 1][0]; i++)
             {
-                int randNum = random.Next(100);
-                if (randNum < probabilityPerStage[level - 1][(int)MONSTER_TYPE.SLIME])
+                int randNum = random.Next(0, 100);
+                if (randNum < probability[(int)MONSTER_TYPE.SLIME])
                 {
                     stageMonsters.Add(MONSTER_TYPE.SLIME);
                 }
-                else if (randNum < probabilityPerStage[level - 1][(int)MONSTER_TYPE.GOBLIN])
+                else if (randNum < probability[(int)MONSTER_TYPE.GOBLIN])
                 {
                     stageMonsters.Add(MONSTER_TYPE.GOBLIN);
                 }
-                else if (randNum < probabilityPerStage[level - 1][(int)MONSTER_TYPE.ELF])
+                else if (randNum < probability[(int)MONSTER_TYPE.ELF])
                 {
                     stageMonsters.Add(MONSTER_TYPE.ELF);
                 }
-                else if (randNum < probabilityPerStage[level - 1][(int)MONSTER_TYPE.ORC])
+                else if (randNum < probability[(int)MONSTER_TYPE.ORC])
                 {
                     stageMonsters.Add(MONSTER_TYPE.ORC);
                 }
-                else if (randNum < probabilityPerStage[level - 1][(int)MONSTER_TYPE.DRAGON])
+                else if (randNum < probability[(int)MONSTER_TYPE.DRAGON])
                 {
                     stageMonsters.Add(MONSTER_TYPE.DRAGON);
                 }
