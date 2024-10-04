@@ -120,10 +120,10 @@ namespace Roronoa_TXT_RPG
                 case "마을을 위협하는 슬라임 처치":
                     tempData.Title = new StringBuilder(presetName);
                     tempData.Story = new StringBuilder("이봐! 마을 근처에 슬라임들이 너무 많아졌다고 생각하지 않나?\n마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해주게!");
-                    tempData.Progress = new StringBuilder("- 슬라임 5마리 처치");
+                    tempData.Progress = new StringBuilder("- 슬라임 2마리 처치");
 
                     tempData.CurValue = 0;
-                    tempData.TargetValue = 5;
+                    tempData.TargetValue = 2;
 
                     type = QuestType.KILL_SLIME;
 
@@ -133,8 +133,6 @@ namespace Roronoa_TXT_RPG
                     IReward? iReward = new RewardFactory().CreateReward(itemList);
                     if(null != iReward)
                         tempData.IRewardList.Add(iReward);
-
-                    
                     break;
                 case "장비를 장착 해보기":
                     tempData.Title = new StringBuilder(presetName);
