@@ -12,12 +12,12 @@ namespace Roronoa_TXT_RPG
     internal class Stage
     {
         public int level { get; protected set; }
+        List<MONSTER_TYPE> stageMonsters = new List<MONSTER_TYPE>();//스테이지 몬스터
 
         internal Stage()
         {
             level = 1;
         }
-        List<MONSTER_TYPE> stageMonsters = new List<MONSTER_TYPE>();//스테이지 몬스터
 
         //임의로 몬스터 지정
         List<List<MONSTER_TYPE>> allStageMonsters = new List<List<MONSTER_TYPE>> {
@@ -33,7 +33,8 @@ namespace Roronoa_TXT_RPG
             new List<MONSTER_TYPE> { MONSTER_TYPE.DRAGON },                                          // Stage 10
             };
 
-        //Stage별 몬스터 나올 확률: 순서대로 {몬스터 수, Slime, Goblin, Elf, Orc, Dragon}
+        //Stage별 몬스터 나올 확률 리스트 
+        //순서대로 {몬스터 수, Slime, Goblin, Elf, Orc, Dragon}
         private List<List<int>> probabilityPerStage = new List<List<int>> {
             new List<int>{ 3, 100, 0, 0, 0, 0 },    // Stage 1
             new List<int>{ 2, 60, 40, 0, 0, 0 },    // Stage 2
@@ -48,7 +49,7 @@ namespace Roronoa_TXT_RPG
 
         };
         List<int> probability = new List<int> ();
-        public void probablityCurculate()
+        public void ProbablityCurculate()
         {
             probability.Clear();
             probability.Add(0);
@@ -59,12 +60,10 @@ namespace Roronoa_TXT_RPG
                 probability.Add(prob);
             }
         }
-
-
         public void CreateStageMonsters()
         {
             stageMonsters.Clear();
-            probablityCurculate();
+            ProbablityCurculate();
             Random random = new Random();
             for (int i = 0; i < probabilityPerStage[level - 1][0]; i++)
             {
@@ -92,7 +91,6 @@ namespace Roronoa_TXT_RPG
             }
 
         }
-
         public void PrintStageInfo()
         {
             Console.WriteLine($"Stage {level}");
@@ -106,7 +104,6 @@ namespace Roronoa_TXT_RPG
             CreateStageMonsters();
             return stageMonsters;
         }
-
         public void PrintStage()
         {
             Console.Write($"Stage {level}");

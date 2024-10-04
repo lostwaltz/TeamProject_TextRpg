@@ -24,10 +24,10 @@ namespace Roronoa_TXT_RPG
         //선택Queue
         Queue<int> selectQueue = new Queue<int>();
 
-        //Next선택지 개수(0. 다음 )
+        //Default선택지 개수(0. 다음 )
         int _selectNextCount = 0;
 
-        //전투 시작 전 HP 저장
+        //전투 시작 전 정보 저장
         int _beforeBattlePlayerHP;
         int _beforeBattlePlayerLevel;
         int _beforeBattlePlayerGold;
@@ -42,7 +42,7 @@ namespace Roronoa_TXT_RPG
             BattleCreateMonsters();
         }
 
-        internal void SceneSelectPlayerAction()
+        internal void SceneSelectPlayerAction()//행동 선택
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -73,8 +73,7 @@ namespace Roronoa_TXT_RPG
             Program.player.BattlePlayerSelect(selectQueue);
 
         }
-
-        internal void SceneSelectAttackTarget()
+        internal void SceneSelectAttackTarget()//타겟 선택
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -119,8 +118,7 @@ namespace Roronoa_TXT_RPG
             //선택 큐에 넣기
             selectQueue.Enqueue(_selectTarget);
         }
-
-        internal void ScenePlayerAttackResult()
+        internal void ScenePlayerAttackResult()//공격 결과
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -154,8 +152,7 @@ namespace Roronoa_TXT_RPG
             }
             _monsterDeadCount = 0;
         }
-
-        public void SceneMonsterAttackResult()
+        public void SceneMonsterAttackResult()//몬스터의 공격
         {
             Console.Clear();
             Console.WriteLine("Battle!!");
@@ -195,9 +192,7 @@ namespace Roronoa_TXT_RPG
             selectQueue.Enqueue(_selectNext);
 
         }
-
-        //Battle이 끝인지? 끝이면 승리Scene과 패배Scene을 출력한다
-        public void SceneIsBattleResult()
+        public void SceneIsBattleResult() //Battle이 끝인지? 끝이면 승리Scene Or 패배Scene을 출력한다
         {
             Console.Clear();
             if (isVictory == true)
@@ -247,29 +242,6 @@ namespace Roronoa_TXT_RPG
 
 
 
-
-
-        public int LastSelect()//Queue가 비어있으면 -1 반환
-        {
-            if (selectQueue.Count == 0)
-            {
-                return -1;
-            }
-            List<int> selectList = selectQueue.ToList();
-            return selectList[selectList.Count - 1];
-        }
-
-
-        public int DequeueSelection()//Queue가 비어있으면 -1 반환
-        {
-            if (selectQueue.TryDequeue(out int result))
-            {
-                return result;
-            }
-            return -1;
-        }
-
-
         public void BattleCreateMonsters()//각 Stage별 몬스터를 가져온다
         {
             List<MONSTER_TYPE> monstersTypeList = Program.stage.TakeMostersTypeForEachStage();
@@ -294,6 +266,23 @@ namespace Roronoa_TXT_RPG
                         break;
                 }
             }
+        }
+        public int LastSelect()//Queue가 비어있으면 -1 반환
+        {
+            if (selectQueue.Count == 0)
+            {
+                return -1;
+            }
+            List<int> selectList = selectQueue.ToList();
+            return selectList[selectList.Count - 1];
+        }
+        public int DequeueSelection()//Queue가 비어있으면 -1 반환
+        {
+            if (selectQueue.TryDequeue(out int result))
+            {
+                return result;
+            }
+            return -1;
         }
 
 

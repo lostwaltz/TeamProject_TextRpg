@@ -21,27 +21,27 @@ namespace Roronoa_TXT_RPG
         }
         public override void SceneUpdate()
         {
-            
-            _battle.SceneSelectPlayerAction();
-            if (_battle.LastSelect() != 0) { //0이면 도망
-                _battle.SceneSelectAttackTarget();
-                if (_battle.LastSelect() != 0)//0이면 다시 플레이어 선택
+            _battle.SceneSelectPlayerAction();//행동 선택
+            if (_battle.LastSelect() != 0) //0이면 로비
+            { 
+                _battle.SceneSelectAttackTarget();//타겟 선택
+                if (_battle.LastSelect() != 0) //0이면 행동 취소
                 {
-                    _battle.ScenePlayerAttackResult();
+                    _battle.ScenePlayerAttackResult();//공격 결과
                     _battle.DequeueSelection();
-                    _battle.SceneIsBattleResult(); 
+                    _battle.SceneIsBattleResult(); //배틀이 끝이면 전투결과
                     if (_battle.LastSelect() != 0)
                     {
-                        _battle.SceneMonsterAttackResult();
+                        _battle.SceneMonsterAttackResult();//몬스터의 공격
                         _battle.DequeueSelection();
-                        _battle.SceneIsBattleResult(); 
+                        _battle.SceneIsBattleResult(); //배틀이 끝이면 전투결과
                     }
                 }
                 else
                 {
                     while (_battle.DequeueSelection() > -1) { }
                 }
-                if (_battle.DequeueSelection() == 0)
+                if (_battle.DequeueSelection() == 0) //배틀이 끝남
                 {
                     Program.stage.StageUp();
                     _battle = new Battle();
