@@ -16,13 +16,10 @@ namespace Roronoa_TXT_RPG
         public MONSTER_TYPE MonsterType { get; set; }
     }
 
-    internal class MonsterDamageEventArgs : EventArgs
+    internal class PlayerEquipEventArgs : EventArgs
     {
-        public MonsterDamageEventArgs(int monsterDamage)
+        public PlayerEquipEventArgs()
         {
-            MonsterDamage = monsterDamage;
         }
-
-        public int MonsterDamage { get; set; }
     }
 }

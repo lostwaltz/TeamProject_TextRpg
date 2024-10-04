@@ -320,6 +320,7 @@ namespace Roronoa_TXT_RPG
                     }
                     break;
             }
+            EventManager.instance?.Publish<PlayerEquipEventArgs>(new PlayerEquipEventArgs());
         }
         public void UnEquipItem(int itemIndex)
         {

@@ -53,8 +53,8 @@ namespace Roronoa_TXT_RPG
             
             SceneManager.InitSceneManager();
             EventManager.InitEventManager();
-            QuestManager.InitQuestManager();
             ItemManager.InitItemManager();
+            QuestManager.InitQuestManager();
 
         }
         static void Update()

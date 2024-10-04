@@ -46,7 +46,7 @@ namespace Roronoa_TXT_RPG
                 reward.PrintReward();
             }
         }
-        public void ApplyReward(IDummyPlayerInterface playerInterface)
+        public void ApplyReward()
         {
             switch (type)
             {
@@ -62,13 +62,18 @@ namespace Roronoa_TXT_RPG
                     });
                     break;
                 case QuestType.EQIOP_ITEM:
+                    EventManager.instance?.Unsubscribe<MonsterKillEventArgs>((monsterType) =>
+                    {
+                        QuestStruct tempData = QuestData;
+                        tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                        QuestData = tempData;
+                    });
                     break;
             }
 
-
             for (int i = 0; i < QuestData.IRewardList.Count; i++)
             {
-                QuestData.IRewardList[i].GiveReward(playerInterface);
+                QuestData.IRewardList[i].GiveReward();
             }
         }
 
@@ -93,6 +98,12 @@ namespace Roronoa_TXT_RPG
                     });
                     break;
                 case QuestType.EQIOP_ITEM:
+                    EventManager.instance?.Subscribe<PlayerEquipEventArgs>((monsterType) =>
+                    {
+                       QuestStruct tempData = QuestData;
+                       tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                       QuestData = tempData;
+                    });
                     break;
             }
 
@@ -131,7 +142,7 @@ namespace Roronoa_TXT_RPG
                     tempData.Progress = new StringBuilder("- 장비 장착");
 
                     tempData.CurValue = 0;
-                    tempData.TargetValue = 5;
+                    tempData.TargetValue = 1;
 
                     type = QuestType.EQIOP_ITEM;
 
@@ -148,11 +159,5 @@ namespace Roronoa_TXT_RPG
 
             QuestData = tempData;
         }
-    }
-
-    public interface IDummyPlayerInterface
-    {
-        void AddPlayerStat(int stat);
-
     }
 }

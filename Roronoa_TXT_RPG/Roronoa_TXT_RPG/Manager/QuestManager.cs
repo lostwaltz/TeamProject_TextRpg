@@ -97,7 +97,7 @@ namespace Roronoa_TXT_RPG
 
                     if(1 == selectNumber)
                     {
-                        //pair.quest.ApplyReward()
+                        pair.quest.ApplyReward();
                         questPairList.Remove(pair);
                     }
                     else if (0 == selectNumber)
