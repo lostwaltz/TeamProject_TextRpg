@@ -8,7 +8,7 @@ namespace Roronoa_TXT_RPG
 {
     public interface IReward
     {
-        void GiveReward(IDummyPlayerInterface playerInterface);
+        void GiveReward();
         void PrintReward();
     }
 
@@ -29,13 +29,13 @@ namespace Roronoa_TXT_RPG
         }
         Dictionary<string, List<Item>> rewardItem = new Dictionary<string, List<Item>>();
 
-        public void GiveReward(IDummyPlayerInterface playerInterface)
+        public void GiveReward()
         {
             foreach (KeyValuePair<string, List<Item>> keyValuePair in rewardItem)
             {
                 foreach(Item item in keyValuePair.Value)
                 {
-                    // 플레이어 아이템 넣기 코드
+                    Program.player.GetItem(item);
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace Roronoa_TXT_RPG
         }
 
         // 멤버변수 플레이어 스텟 정보 구조체 변수 선언.
-        public void GiveReward(IDummyPlayerInterface playerInterface)
+        public void GiveReward()
         {
             // 플레이어 스텟 증가 코드
         }

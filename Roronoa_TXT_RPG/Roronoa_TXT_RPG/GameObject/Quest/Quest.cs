@@ -10,6 +10,8 @@ using static Roronoa_TXT_RPG.Quest;
 
 namespace Roronoa_TXT_RPG
 {
+    public enum QuestType { KILL_SLIME, EQIOP_ITEM, END }
+
     public interface IRenderReward
     {
         void RenderReward();
@@ -17,6 +19,7 @@ namespace Roronoa_TXT_RPG
 
     public class Quest : IRenderReward
     {
+        public QuestType type { get; private set; }
         public Quest(string presetName)
         {
             CreateQuestPreset(presetName);
@@ -43,21 +46,34 @@ namespace Roronoa_TXT_RPG
                 reward.PrintReward();
             }
         }
-        public void ApplyReward(IDummyPlayerInterface playerInterface)
+        public void ApplyReward()
         {
-            EventManager.instance?.Unsubscribe<MonsterKillEventArgs>((monsterType) =>
+            switch (type)
             {
-                if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
-                {
-                    QuestStruct tempData = QuestData;
-                    tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
-                    QuestData = tempData;
-                }
-            });
+                case QuestType.KILL_SLIME:
+                    EventManager.instance?.Unsubscribe<MonsterKillEventArgs>((monsterType) =>
+                    {
+                        if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
+                        {
+                            QuestStruct tempData = QuestData;
+                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                            QuestData = tempData;
+                        }
+                    });
+                    break;
+                case QuestType.EQIOP_ITEM:
+                    EventManager.instance?.Unsubscribe<MonsterKillEventArgs>((monsterType) =>
+                    {
+                        QuestStruct tempData = QuestData;
+                        tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                        QuestData = tempData;
+                    });
+                    break;
+            }
 
             for (int i = 0; i < QuestData.IRewardList.Count; i++)
             {
-                QuestData.IRewardList[i].GiveReward(playerInterface);
+                QuestData.IRewardList[i].GiveReward();
             }
         }
 
@@ -66,17 +82,32 @@ namespace Roronoa_TXT_RPG
             return QuestData.CurValue >= QuestData.TargetValue;
         }
 
-        public void SubscribeSlimeQuest()
+        public void SubscribeQuest()
         {
-            EventManager.instance?.Subscribe<MonsterKillEventArgs>((monsterType) =>
+            switch (type)
             {
-                if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
-                {
-                    QuestStruct tempData = QuestData;
-                    tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
-                    QuestData = tempData;
-                }
-            });
+                case QuestType.KILL_SLIME:
+                    EventManager.instance?.Subscribe<MonsterKillEventArgs>((monsterType) =>
+                    {
+                        if (MONSTER_TYPE.SLIME == monsterType.MonsterType)
+                        {
+                            QuestStruct tempData = QuestData;
+                            tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                            QuestData = tempData;
+                        }
+                    });
+                    break;
+                case QuestType.EQIOP_ITEM:
+                    EventManager.instance?.Subscribe<PlayerEquipEventArgs>((monsterType) =>
+                    {
+                       QuestStruct tempData = QuestData;
+                       tempData.CurValue = Math.Min(tempData.TargetValue, tempData.CurValue + 1);
+                       QuestData = tempData;
+                    });
+                    break;
+            }
+
+
         }
 
         private void CreateQuestPreset(string presetName)
@@ -94,6 +125,8 @@ namespace Roronoa_TXT_RPG
                     tempData.CurValue = 0;
                     tempData.TargetValue = 5;
 
+                    type = QuestType.KILL_SLIME;
+
                     tempData.IRewardList = new List<IReward>();
                     itemList.Add(new Item("낡은 검"));
 
@@ -109,7 +142,9 @@ namespace Roronoa_TXT_RPG
                     tempData.Progress = new StringBuilder("- 장비 장착");
 
                     tempData.CurValue = 0;
-                    tempData.TargetValue = 5;
+                    tempData.TargetValue = 1;
+
+                    type = QuestType.EQIOP_ITEM;
 
                     tempData.IRewardList = new List<IReward>();
                     itemList.Add(new Item("청동 도끼"));
@@ -124,11 +159,5 @@ namespace Roronoa_TXT_RPG
 
             QuestData = tempData;
         }
-    }
-
-    public interface IDummyPlayerInterface
-    {
-        void AddPlayerStat(int stat);
-
     }
 }

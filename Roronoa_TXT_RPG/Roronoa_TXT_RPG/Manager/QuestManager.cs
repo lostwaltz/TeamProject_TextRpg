@@ -83,12 +83,7 @@ namespace Roronoa_TXT_RPG
                 {
                     pair.isSelect = true;
 
-                    switch(pair.quest.QuestData.Title.ToString())
-                    {
-                        case "마을을 위협하는 슬라임 처치":
-                            pair.quest.SubscribeSlimeQuest();
-                            break;
-                    }
+                    pair.quest.SubscribeQuest();
                 }
                 else if (0 == selectNumber)
                     return;
@@ -102,7 +97,7 @@ namespace Roronoa_TXT_RPG
 
                     if(1 == selectNumber)
                     {
-                        //pair.quest.ApplyReward()
+                        pair.quest.ApplyReward();
                         questPairList.Remove(pair);
                     }
                     else if (0 == selectNumber)
