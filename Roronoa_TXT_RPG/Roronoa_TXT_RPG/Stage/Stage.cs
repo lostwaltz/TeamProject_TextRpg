@@ -47,14 +47,15 @@ namespace Roronoa_TXT_RPG
             new List<int>{ 1, 0, 0, 0, 0, 100 }     // Stage 10
 
         };
-        List<int> probability = new List<int>();
+        List<int> probability = new List<int> ();
         public void probablityCurculate()
         {
             probability.Clear();
+            probability.Add(0);
             int prob = 0;
-            for (int i = 1; i < probabilityPerStage[level].Count; i++)
+            for (int i = 1; i < probabilityPerStage[level - 1].Count; i++)
             {
-                prob += probabilityPerStage[level][i];
+                prob += probabilityPerStage[level-1][i];
                 probability.Add(prob);
             }
         }
