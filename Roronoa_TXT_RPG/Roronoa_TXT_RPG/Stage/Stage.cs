@@ -49,17 +49,6 @@ namespace Roronoa_TXT_RPG
 
         };
         List<int> probability = new List<int> ();
-        public void ProbablityCurculate()
-        {
-            probability.Clear();
-            probability.Add(0);
-            int prob = 0;
-            for (int i = 1; i < probabilityPerStage[level - 1].Count; i++)
-            {
-                prob += probabilityPerStage[level-1][i];
-                probability.Add(prob);
-            }
-        }
         public void CreateStageMonsters()
         {
             stageMonsters.Clear();
@@ -91,6 +80,22 @@ namespace Roronoa_TXT_RPG
             }
 
         }
+        public List<MONSTER_TYPE> TakeMostersTypeForEachStage()
+        {
+            CreateStageMonsters();
+            return stageMonsters;
+        }
+        public void ProbablityCurculate()
+        {
+            probability.Clear();
+            probability.Add(0);
+            int prob = 0;
+            for (int i = 1; i < probabilityPerStage[level - 1].Count; i++)
+            {
+                prob += probabilityPerStage[level-1][i];
+                probability.Add(prob);
+            }
+        }
         public void PrintStageInfo()
         {
             Console.WriteLine($"Stage {level}");
@@ -99,11 +104,7 @@ namespace Roronoa_TXT_RPG
         {
             level = Program.player.level;
         }
-        public List<MONSTER_TYPE> TakeMostersTypeForEachStage()
-        {
-            CreateStageMonsters();
-            return stageMonsters;
-        }
+
         public void PrintStage()
         {
             Console.Write($"Stage {level}");
