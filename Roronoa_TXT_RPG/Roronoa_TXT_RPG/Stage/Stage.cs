@@ -36,14 +36,14 @@ namespace Roronoa_TXT_RPG
         //Stage별 몬스터 나올 확률: 순서대로 {몬스터 수, Slime, Goblin, Elf, Orc, Dragon}
         private List<List<int>> probabilityPerStage = new List<List<int>> {
             new List<int>{ 3, 100, 0, 0, 0, 0 },    // Stage 1
-            new List<int>{ 3, 60, 40, 0, 0, 0 },    // Stage 2
-            new List<int>{ 3, 40, 60, 0, 0, 0 },    // Stage 3
-            new List<int>{ 3, 20, 80, 0, 0, 0 },    // Stage 4
-            new List<int>{ 3, 5, 65, 30, 0, 0 },    // Stage 5
-            new List<int>{ 3, 0, 40, 60, 0, 0 },    // Stage 6
-            new List<int>{ 3, 0, 10, 60, 30, 0 },   // Stage 7
-            new List<int>{ 3, 0, 0, 40, 60, 0 },    // Stage 8
-            new List<int>{ 3, 0, 0, 20, 80, 0 },    // Stage 9
+            new List<int>{ 2, 60, 40, 0, 0, 0 },    // Stage 2
+            new List<int>{ 2, 40, 60, 0, 0, 0 },    // Stage 3
+            new List<int>{ 2, 20, 80, 0, 0, 0 },    // Stage 4
+            new List<int>{ 2, 5, 65, 30, 0, 0 },    // Stage 5
+            new List<int>{ 2, 0, 40, 60, 0, 0 },    // Stage 6
+            new List<int>{ 2, 0, 10, 60, 30, 0 },   // Stage 7
+            new List<int>{ 2, 0, 0, 40, 60, 0 },    // Stage 8
+            new List<int>{ 2, 0, 0, 20, 80, 0 },    // Stage 9
             new List<int>{ 1, 0, 0, 0, 0, 100 }     // Stage 10
 
         };

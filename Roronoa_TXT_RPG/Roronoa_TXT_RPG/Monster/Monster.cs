@@ -46,19 +46,19 @@ namespace Roronoa_TXT_RPG
         {
             Randomstatus();
             name = "슬라임";
-            experience = 3;
+            experience = 30;
 
             if (curHealthPoint < 15)
             {
                 name = "하찮은 슬라임";
-                experience = 2;
+                experience = 20;
                 gold = 7;
             }
 
             if (curHealthPoint > 28)
             {
                 name = "킹슬라임";
-                experience = 5;
+                experience = 50;
                 gold = 13;
             }
 
@@ -96,12 +96,12 @@ namespace Roronoa_TXT_RPG
         {
             Randomstatus();
             name = "고블린";
-            experience = 7;
+            experience = 70;
 
             if (curHealthPoint > 47 && attackPower > 18)
             {
                 name = "고블린족의 장";
-                experience = 10;
+                experience = 100;
                 gold = 27;
             }
 
@@ -137,12 +137,12 @@ namespace Roronoa_TXT_RPG
         {
             Randomstatus();
             name = "엘프";
-            experience = 15;
+            experience = 150;
 
             if (curHealthPoint > 100 && attackPower > 40)
             {
                 name = "하이 엘프";
-                experience = 25;
+                experience = 250;
                 gold = 35;
             }
 
@@ -177,12 +177,12 @@ namespace Roronoa_TXT_RPG
         {
             Randomstatus();
             name = "오크";
-            experience = 40;
+            experience = 400;
 
             if (curHealthPoint > 140 && attackPower > 50)
             {
                 name = "오크족의 장";
-                experience = 54;
+                experience = 540;
             }
         }
 

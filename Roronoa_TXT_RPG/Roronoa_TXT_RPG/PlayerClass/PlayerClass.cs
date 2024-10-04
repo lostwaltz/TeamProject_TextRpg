@@ -35,11 +35,11 @@ namespace Roronoa_TXT_RPG
             // job
             // attackPower
             // defense
-            maxHealthPoint = 100;
-            curHealthPoint = 100;
+            maxHealthPoint = 10000;
+            curHealthPoint = 10000;
             maxManaPoint = 50;
             curManaPoint = 50;
-            gold = 10;
+            gold = 5000;
             _isEquipArmor = false;
             _isEquipWeapon = false;
             _inventoryItems = new List<Item>();
@@ -53,6 +53,12 @@ namespace Roronoa_TXT_RPG
             {
                 experience -= experiencePerLevel[level + levelUp];
                 levelUp++;
+                maxHealthPoint += 20;
+                curHealthPoint += 20;
+                maxManaPoint += 10;
+                curManaPoint += 10;
+                attackPower += 2;
+                defense += 1;
             }
             if (levelUp > 0)
             {
@@ -434,7 +440,7 @@ namespace Roronoa_TXT_RPG
         {
             job = "Assassin";
             name = inputName;
-            attackPower = 25;
+            attackPower = 2500;
             defense = 7;
         }
         public void Skill()
