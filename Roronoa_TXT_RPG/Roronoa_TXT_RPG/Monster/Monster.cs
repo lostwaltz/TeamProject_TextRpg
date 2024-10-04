@@ -8,113 +8,27 @@ using static Roronoa_TXT_RPG.Monster;
 
 namespace Roronoa_TXT_RPG
 {
-    internal class GoblinSkill : MonsterSkill
-    {
-        internal GoblinSkill(Monster InputMonster) : base(InputMonster)
-        {
-
-        }
-
-        public override void MonsterSkillInvocation()
-        {
-            Random random = new Random();
-            int lucky = random.Next(1, 11);
-
-            if (lucky < 4)
-            {
-                monster.skillPower = (int)(monster.attackPower * 1.5f);
-            }
-        }
-    }
-
-    internal class ElfSkill : MonsterSkill
-    {
-        internal ElfSkill(Monster InputMonster) : base(InputMonster)
-        {
-
-        }
-
-        bool ActiveOnce = false;
-
-        public override void MonsterSkillInvocation()
-        {
-            if(ActiveOnce == false)
-            {
-                monster.skillPower = (int)(monster.attackPower * 2);
-                ActiveOnce = true;
-            }
-        }
-    }
-    internal class OrkSkill : MonsterSkill
-    {
-        internal OrkSkill(Monster InputMonster) : base(InputMonster)
-        {
-
-        }
-
-        public override void MonsterSkillInvocation()
-        {
-            if (monster.maxHealthPoint * 0.5 > monster.curHealthPoint)
-            {
-                monster.SetDefense((int)(monster.defense * 1.5f));
-            }
-        }
-    }
-    internal class DragonSkill : MonsterSkill
-    {
-        internal DragonSkill(Monster InputMonster) : base(InputMonster)
-        {
-
-        }
-
-        public override void MonsterSkillInvocation()
-        {
-            Random random = new Random();
-            int lucky = random.Next(1, 11);
-
-            if (lucky < 4)
-            {
-                monster.skillPower = (int)(Program.player.maxHealthPoint * 1.5f);
-            }
-        }
-    }
-    internal class SlaimSkill : MonsterSkill
-    {
-        internal SlaimSkill(Monster InputMonster) : base(InputMonster)
-        {
-            
-        }
-
-        public override void MonsterSkillInvocation()
-        {
-            Random random = new Random();
-            int lucky = random.Next(1, 11);
-
-            if (lucky < 6)
-            {
-                monster.SetCurHealthPoint((int)(monster.curHealthPoint * 1.4));
-            }
-        }
-    }
-
 
     internal class Monster : Character
     {
-        public int skillPower;
         public MonsterSkill skill;
 
         public override void PrintCharacterInfo()
         {
             if (curHealthPoint > 0)
             {
-                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} HP {curHealthPoint,-4} MP {curManaPoint, -4} ATK {attackPower, -3} DEF {defense, -3}");
+                Console.WriteLine($"Lv. {level}  {Program.PadRightForKorean( name , 20)}"+
+                    $" HP {curHealthPoint}/{maxHealthPoint}".PadRight(14)+ $"MP {curManaPoint}/{maxManaPoint}".PadRight(10) + $" ATK {attackPower,-3} DEF {defense,-3}");
             }
             else
             {
-                Console.WriteLine($"Lv. {level} {Program.PadRightForKorean(name, 20)} Dead");
+                Console.WriteLine($"Lv. {level}  {Program.PadRightForKorean(name, 20)} Dead");
             }
         }
+        public override void OnDie()
+        {
 
+        }
         public void Attack(Character character)
         {
             AttackOpponent(character, attackPower);
@@ -125,28 +39,70 @@ namespace Roronoa_TXT_RPG
             AttackOpponent(character, skillPower);
         }
     }
-    internal abstract class MonsterSkill
+
+    internal class Slime : Monster
     {
-        protected Monster monster;
-        internal MonsterSkill(Monster InputMonster)
+        public Slime()
         {
-            monster = InputMonster;
+            Randomstatus();
+            name = "슬라임";
+            experience = 3;
+
+            if (curHealthPoint < 15)
+            {
+                name = "하찮은 슬라임";
+                experience = 2;
+                gold = 7;
+            }
+
+            if (curHealthPoint > 28)
+            {
+                name = "킹슬라임";
+                experience = 5;
+                gold = 13;
+            }
+
         }
 
-        public abstract void MonsterSkillInvocation();
-    }
+        public void Randomstatus()
+        {
+            Random random = new Random();
 
+            int randomLevel = random.Next(1, 2);
+            int randomHealthPoint = random.Next(10, 30);
+            int randomManaPoint = random.Next(0, 0);
+            int randomAttackPower = random.Next(5, 10);
+            int randomDefense = random.Next(1, 3);
+            int randomGold = random.Next(7, 12);
+
+            level = randomLevel;
+            maxHealthPoint = randomHealthPoint;
+            curHealthPoint = maxHealthPoint;
+            maxManaPoint = randomManaPoint;
+            curManaPoint = maxManaPoint;
+            attackPower = randomAttackPower;
+            defense = randomDefense;
+            gold = randomGold;
+        }
+
+        public override void OnDie()
+        {
+            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MONSTER_TYPE.SLIME));
+        }
+    }
     internal class Goblin : Monster
     {
         public Goblin()
         {
             Randomstatus();
-
             name = "고블린";
+            experience = 7;
 
             if (curHealthPoint > 47 && attackPower > 18)
             {
                 name = "고블린족의 장";
+                experience = 10;
+                gold = 27;
             }
 
             skillPower = (int)(attackPower * 1.5f);
@@ -159,14 +115,11 @@ namespace Roronoa_TXT_RPG
             Random random = new Random();
 
             int randomLevel = random.Next(1, 5);
-
             int randomHealthPoint = random.Next(30, 50);
-
             int randomManaPoint = random.Next(5, 20);
-
             int randomAttackPower = random.Next(15, 20);
-
             int randomDefense = random.Next(4, 8);
+            int randomGold = random.Next(17, 25);
 
             level = randomLevel;
             maxHealthPoint = randomHealthPoint;
@@ -175,6 +128,7 @@ namespace Roronoa_TXT_RPG
             curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
             defense = randomDefense;
+            gold = randomGold;
         }
     }
     internal class Elf : Monster
@@ -182,12 +136,14 @@ namespace Roronoa_TXT_RPG
         public Elf()
         {
             Randomstatus();
-
             name = "엘프";
+            experience = 15;
 
             if (curHealthPoint > 100 && attackPower > 40)
             {
                 name = "하이 엘프";
+                experience = 25;
+                gold = 35;
             }
 
 
@@ -203,6 +159,7 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(100, 150);
             int randomAttackPower = random.Next(30, 50);
             int randomDefense = random.Next(8, 12);
+            int randomGold = random.Next(25, 34);
 
             level = randomLevel;
             maxHealthPoint = randomHealthPoint;
@@ -211,6 +168,7 @@ namespace Roronoa_TXT_RPG
             curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
             defense = randomDefense;
+            gold = randomGold;
         }
     }
     internal class Orc : Monster
@@ -218,12 +176,13 @@ namespace Roronoa_TXT_RPG
         public Orc()
         {
             Randomstatus();
-
             name = "오크";
+            experience = 40;
 
             if (curHealthPoint > 140 && attackPower > 50)
             {
                 name = "오크족의 장";
+                experience = 54;
             }
         }
 
@@ -236,6 +195,7 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(10, 25);
             int randomAttackPower = random.Next(40, 60);
             int randomDefense = random.Next(12, 15);
+            int randomGold = random.Next(35, 54);
 
             level = randomLevel;
             maxHealthPoint = randomHealthPoint;
@@ -244,6 +204,7 @@ namespace Roronoa_TXT_RPG
             curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
             defense = randomDefense;
+            gold = randomGold;
         }
     }
 
@@ -252,7 +213,6 @@ namespace Roronoa_TXT_RPG
         public Dragon()
         {
             Randomstatus();
-
             name = "드래곤";
 
             if (curHealthPoint > 1790)
@@ -270,6 +230,7 @@ namespace Roronoa_TXT_RPG
             int randomManaPoint = random.Next(500, 1000);
             int randomAttackPower = random.Next(130, 150);
             int randomDefense = random.Next(50, 60);
+            int randomGold = random.Next(1000, 2000);
 
             level = randomLevel;
             maxHealthPoint = randomHealthPoint;
@@ -278,50 +239,11 @@ namespace Roronoa_TXT_RPG
             curManaPoint = maxManaPoint;
             attackPower = randomAttackPower;
             defense = randomDefense;
+            gold = randomGold;
         }
     }
-    internal class Slime : Monster
-    {
-        public Slime()
-        {
-            Randomstatus();
 
-            name = "슬라임";
 
-            if (curHealthPoint < 15)
-            {
-                name = "하찮은 슬라임";
-            }
 
-            if (curHealthPoint > 28)
-            {
-                name = "킹슬라임";
-            }
 
-        }
-
-        public void Randomstatus()
-        {
-            Random random = new Random();
-
-            int randomLevel = random.Next(1, 2);
-            int randomHealthPoint = random.Next(10, 30);
-            int randomManaPoint = random.Next(0, 0);
-            int randomAttackPower = random.Next(5, 10);
-            int randomDefense = random.Next(1, 3);
-
-            level = randomLevel;
-            maxHealthPoint = randomHealthPoint;
-            curHealthPoint = maxHealthPoint;
-            maxManaPoint = randomManaPoint;
-            curManaPoint = maxManaPoint;
-            attackPower = randomAttackPower;
-            defense = randomDefense;
-        }
-
-        public override void OnDie()
-        {
-            EventManager.instance?.Publish<MonsterKillEventArgs>(new MonsterKillEventArgs(MONSTER_TYPE.SLIME));
-        }
-    }
 }

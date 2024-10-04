@@ -18,7 +18,7 @@ namespace Roronoa_TXT_RPG
         private bool? isVictory;
 
         //배틀 스테이지 몬스터 리스트
-        List<Monster> monsters = new List<Monster>();
+        List<Monster> monsters;
         int _monsterDeadCount; //죽인 몬스터 수
 
         //선택Queue
@@ -29,12 +29,16 @@ namespace Roronoa_TXT_RPG
 
         //전투 시작 전 HP 저장
         int _beforeBattlePlayerHP;
+        int _beforeBattlePlayerLevel;
+        int _beforeBattlePlayerGold;
         internal Battle()
         {
             isVictory = null;
             _monsterDeadCount = 0;
+            _beforeBattlePlayerLevel = Program.player.level;
             _beforeBattlePlayerHP = Program.player.curHealthPoint;
-
+            _beforeBattlePlayerGold = Program.player.gold;
+            monsters = new List<Monster>();
             BattleCreateMonsters();
         }
 
@@ -130,6 +134,7 @@ namespace Roronoa_TXT_RPG
             //HP 10->Dead
             Program.player.BattlePlayerAction(selectQueue, monsters);
             Console.WriteLine("");
+            Console.WriteLine("");
             Console.WriteLine("0. 다음");
             Console.WriteLine("");
             Console.Write(">>");
@@ -172,6 +177,7 @@ namespace Roronoa_TXT_RPG
                     //몬스터 공격 구현부
                     //만약 몬스터 스킬이 생기면 몬스터 클래스에 공격 메커니즘을 만들어야 할 듯하다.
                     monster.Attack(Program.player);
+                    Console.WriteLine("");
                 }
             }
 
@@ -206,7 +212,7 @@ namespace Roronoa_TXT_RPG
 
                 //Lv.1 Chad
                 //HP 100-> 74
-                Program.player.PrintCharacterInfo(_beforeBattlePlayerHP);
+                Program.player.PrintCharacterInfo(_beforeBattlePlayerHP, _beforeBattlePlayerLevel, _beforeBattlePlayerGold);
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("0. 다음");

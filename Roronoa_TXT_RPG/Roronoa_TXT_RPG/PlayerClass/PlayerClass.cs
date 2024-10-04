@@ -24,10 +24,13 @@ namespace Roronoa_TXT_RPG
 
         public SCENE_INFO_TYPE sceneInfoType { get; protected set; }
         
+        static List<int> experiencePerLevel = new List<int> { 0, 6, 8, 15, 25, 40, 80, 140, 250, 400 };
+        int maxLevel = experiencePerLevel.Count;
 
         internal Player()
         {
             level = 1;
+            experience = 0;
             // name
             // job
             // attackPower
@@ -36,42 +39,44 @@ namespace Roronoa_TXT_RPG
             curHealthPoint = 100;
             maxManaPoint = 50;
             curManaPoint = 50;
-            gold = 5000;
+            gold = 10;
             _isEquipArmor = false;
             _isEquipWeapon = false;
             _inventoryItems = new List<Item>();
             _equippedItems = new List<Item>() { new Item(ItemCategory.WEAPON) , new Item(ItemCategory.ARMOR) };
             sceneInfoType = SCENE_INFO_TYPE.WATCH;
         }
+        public void CheckLevel()
+        {
+            int levelUp = 0;
+            while (level + levelUp != maxLevel && experience >= experiencePerLevel[level+levelUp])
+            {
+                experience -= experiencePerLevel[level + levelUp];
+                levelUp++;
+            }
+            if (levelUp > 0)
+            {
+                Console.Write($"Lv {level} -> {level += levelUp}");
+            }
             
-        public void Attack()
-        {
-            Console.WriteLine("공격했습니다.");
         }
-        public void Skill()
+        public void PrintExp()
         {
-            Console.WriteLine("스킬을 사용했습니다.");
-        } 
-
-        public void AddGold(int getGold)
-        {
-            gold += getGold;
+            if (level < maxLevel)
+            {
+                Console.Write($"EXP  " + $"{experience}/{experiencePerLevel[level]}".PadRight(9));
+            }
+            else
+            {
+                Console.Write("    Max Level");
+            }
         }
-        public void EnterSell()
-        {
-            sceneInfoType = SCENE_INFO_TYPE.SELL;
-        }
-        public void ExitSell()
-        {
-            sceneInfoType = SCENE_INFO_TYPE.WATCH;
-        }
+        
         public void DisplayStatusAndItemInfo()
         {
             int inputSelectNum;
             Console.WriteLine($"Status & Belongings");
             PrintCharacterInfo();
-            Console.WriteLine($" Gold: {gold}G");
-            Console.WriteLine($"");
             //>>아이템 장착
             PrintEquipedItemInfo();
             Console.WriteLine($"");
@@ -142,9 +147,12 @@ namespace Roronoa_TXT_RPG
         public override void PrintCharacterInfo()
         {
             Console.WriteLine(Program.PadLeftForKorean("[내정보]", 18));
-            Console.WriteLine($" Lv.{level} {name} {job}");
-            Console.WriteLine($" HP  {curHealthPoint}/{maxHealthPoint}".PadRight(17) + $"MP  {curManaPoint}/{maxManaPoint}");
-            Console.WriteLine($" ATK {attackPower}".PadRight(17) + $"DEF {defense}");
+            Console.WriteLine($" Lv.{level, -3}" + Program.CenterAlign(name, 18) +$"({job})");
+            Console.Write($" "); PrintExp();Console.WriteLine("");
+            Console.WriteLine($" HP   " + $"{curHealthPoint}/{maxHealthPoint}".PadRight(11) + $"MP   {curManaPoint}/{maxManaPoint}");
+            Console.WriteLine($" ATK  {attackPower}".PadRight(17) + $"DEF  {defense}");
+            Console.WriteLine($" Gold {gold}G");
+            Console.WriteLine($"");
         }
        
         public void PrintEquipedItemInfo()
@@ -193,49 +201,41 @@ namespace Roronoa_TXT_RPG
             }
         }
 
-        string[] battlePlayerSelectType = { "공격" };
-
-       public void BattlePlayerSelect(Queue<int> selectQueue)
+        public void GetExp(int getExp)
         {
-            Console.WriteLine("무엇을 하시겠습니까?");
-            Console.WriteLine("");
-            for (int i = 0; i < battlePlayerSelectType.Length; i++)
-            {
-                int playerSelectNum = i + 1;
-                Console.WriteLine($"{playerSelectNum}. {battlePlayerSelectType[i]}");
-            }
-            Console.WriteLine("");
-            Console.WriteLine($"0. 도망");
-            Console.WriteLine("");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">>");
-
-            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length, true);
-
-            selectQueue.Enqueue(_selectPlayerAction);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($" +{getExp}EXP  EXP {experience} -> ");
+            experience += getExp;
+            stringBuilder.Append($"{experience}");
+            Console.Write(stringBuilder.ToString().PadRight(20));
+        }
+        public void GetGold(int getGold)
+        {
+            Console.Write($" +{getGold}G {gold}G -> ");
+            gold += getGold;
+            Console.Write($"{gold}G");
         }
 
-        
-       public void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
+        public void AddGold(int getGold)
         {
-            PLAYER_ACTION_TYPE playerAction = (PLAYER_ACTION_TYPE)selectQueue.Dequeue();
-            switch(playerAction)
-            {
-                case PLAYER_ACTION_TYPE.ATTACK:
-                int selectMonster = selectQueue.Dequeue() - 1;//입력받은 선택지 - 1
-                    AttackOpponent(monstersList[selectMonster], attackPower);
-                    break;
-            }
-             
-
+            gold += getGold;
         }
+        public void EnterSell()
+        {
+            sceneInfoType = SCENE_INFO_TYPE.SELL;
+        }
+        public void ExitSell()
+        {
+            sceneInfoType = SCENE_INFO_TYPE.WATCH;
+        }
+
 
 
 
 
         public bool GetItem(Item item)
         {
-            if(_inventoryItems.Count < _inventoryMaxCount)
+            if (_inventoryItems.Count < _inventoryMaxCount)
             {
                 _inventoryItems.Add(item);
                 return true;
@@ -257,7 +257,7 @@ namespace Roronoa_TXT_RPG
         {
             if (gold >= item.Price)
             {
-                if(GetItem(new Item(item.Name.ToString())))
+                if (GetItem(new Item(item.Name.ToString())))
                 {
                     Console.Write($"{item.Name}을 구매하셨습니다! Gold {gold} -> ");
                     gold -= item.Price;
@@ -288,7 +288,7 @@ namespace Roronoa_TXT_RPG
                 case ItemCategory.WEAPON:
                     if (_isEquipWeapon == false)
                     {
-                        _equippedItems[(int)ItemCategory.WEAPON] =_inventoryItems[itemIndex];
+                        _equippedItems[(int)ItemCategory.WEAPON] = _inventoryItems[itemIndex];
                         ThrowItem(itemIndex);
                         _isEquipWeapon = true;
                         attackPower += _equippedItems[(int)ItemCategory.WEAPON].ItemData.Stat;
@@ -336,6 +336,59 @@ namespace Roronoa_TXT_RPG
                     break;
             }
             _equippedItems[itemIndex] = new Item(_equippedItems[itemIndex].ItemData.ItemCategory);
+        }
+
+
+
+
+
+
+
+        string[] battlePlayerSelectType = { "공격" };
+
+       public void BattlePlayerSelect(Queue<int> selectQueue)
+        {
+            Console.WriteLine("무엇을 하시겠습니까?");
+            Console.WriteLine("");
+            for (int i = 0; i < battlePlayerSelectType.Length; i++)
+            {
+                int playerSelectNum = i + 1;
+                Console.WriteLine($"{playerSelectNum}. {battlePlayerSelectType[i]}");
+            }
+            Console.WriteLine("");
+            Console.WriteLine($"0. 도망");
+            Console.WriteLine("");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+
+            Program.KeyInputCheck(out int _selectPlayerAction, battlePlayerSelectType.Length, true);
+
+            selectQueue.Enqueue(_selectPlayerAction);
+        }
+
+        
+       public void BattlePlayerAction(Queue<int> selectQueue, List<Monster> monstersList)
+        {
+            PLAYER_ACTION_TYPE playerAction = (PLAYER_ACTION_TYPE)selectQueue.Dequeue();
+            switch(playerAction)
+            {
+                case PLAYER_ACTION_TYPE.ATTACK:
+                int selectMonster = selectQueue.Dequeue() - 1;//입력받은 선택지 - 1
+                    AttackOpponent(monstersList[selectMonster], attackPower);
+                    break;
+            }
+             
+
+        }
+
+
+        public void Attack()
+        {
+            Console.WriteLine("공격했습니다.");
+        }
+        public void Skill()
+        {
+            Console.WriteLine("스킬을 사용했습니다.");
         }
 
     }

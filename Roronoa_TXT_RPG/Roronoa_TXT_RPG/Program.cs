@@ -138,5 +138,30 @@ namespace Roronoa_TXT_RPG
             // 목표 길이에서 현재 길이를 뺀 만큼 공백을 추가
             return input.PadLeft(totalLength - (length - input.Length));
         }
+
+        public static string CenterAlign(string input, int totalLength)//글자 중앙 정렬
+        {
+            int length = 0;
+            foreach (char c in input)
+            {
+                // 한글은 유니코드 범위상 2칸으로 계산
+                if (char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
+                {
+                    length += 2;  // 한글은 2칸으로 계산
+                }
+                else
+                {
+                    length += 1;  // 그 외 문자(영문, 숫자 등)는 1칸으로 계산
+                }
+            }
+            int padding = (totalLength - length) / 2;
+            if (padding <= 0)
+            {
+                return input;
+            }
+
+            return input.PadLeft(input.Length + padding).PadRight(totalLength);
+        }
     }
+
 }

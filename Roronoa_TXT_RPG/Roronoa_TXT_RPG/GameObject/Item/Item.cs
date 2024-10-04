@@ -2,6 +2,7 @@
 
 namespace Roronoa_TXT_RPG
 {
+    //아이템 리스트는 ItemManager에 있습니다.
     public enum ItemCategory
     {
         WEAPON, ARMOR, END, NULL

@@ -9,19 +9,20 @@ namespace Roronoa_TXT_RPG
         public static ItemManager? instance { get; private set; }
         static public STORE_ACTION_TYPE storeActionType { get; private set; }
         
+        //전체 아이템 리스트(상점에서 사용)
         static private List<ItemStruct> itemList = new List<ItemStruct>() {
-        new ItemStruct("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", ItemCategory.ARMOR, 5, 100),
-        new ItemStruct("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemCategory.ARMOR, 9, 200),
-        new ItemStruct("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", ItemCategory.ARMOR, 15, 350),
-        new ItemStruct("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다.", ItemCategory.WEAPON, 2, 60),
-        new ItemStruct("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", ItemCategory.WEAPON, 5, 150),
-        new ItemStruct("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", ItemCategory.WEAPON, 7, 300),
+        new ItemStruct("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", ItemCategory.ARMOR, 7, 100),
+        new ItemStruct("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemCategory.ARMOR, 21, 200),
+        new ItemStruct("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", ItemCategory.ARMOR, 30, 350),
+        new ItemStruct("낡은 검", "쉽게 볼 수 있는 낡은 검 입니다.", ItemCategory.WEAPON, 5, 60),
+        new ItemStruct("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", ItemCategory.WEAPON, 10, 150),
+        new ItemStruct("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", ItemCategory.WEAPON, 30, 300),
          new ItemStruct("취업의 돌", "소유한자를 취업시켜준다는 취업의 돌...열심히 하자", ItemCategory.WEAPON, 100, 999)
         };
         public List<ItemStruct> ItemList
         {
-            get { return itemList; }  // 리스트의 값을 반환
-            protected set { itemList = value; } // 외부에서 리스트 값을 설정할 수 있게 허용
+            get { return itemList; }
+            protected set { itemList = value; }
         }
 
         public static void InitItemManager()

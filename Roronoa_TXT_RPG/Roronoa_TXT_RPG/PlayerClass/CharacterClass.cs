@@ -4,6 +4,7 @@ namespace Roronoa_TXT_RPG
     internal class Character
 	{
         public int level { get; protected set; }
+        public int experience { get; protected set; }
         public string name { get; protected set; }
         public string job { get; protected set; }
         public int attackPower { get; protected set; }
@@ -45,30 +46,41 @@ namespace Roronoa_TXT_RPG
             
             if(_takeDamageHealthPoint <= 0)
             {
-                Console.WriteLine($"Lv.{level} {name}의 방어! [방어력: {defense}]");
-                Console.WriteLine($"Lv.{level} {name}이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
+                Console.WriteLine($"Lv.{level} [{name}]의 방어! [방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} [{name}]이(가){trueDamage}만큼 데미지를 받아 사망했습니다. " +
                     $"HP {curHealthPoint} -> Dead");
-                Console.WriteLine();
 
-                this.OnDie();
+                
+                
                 _takeDamageHealthPoint = 0;
             }
             else
             {
-                Console.WriteLine($"Lv.{level} {name}의 방어! [방어력: {defense}]");
-                Console.WriteLine($"Lv.{level} {name}이(가) {trueDamage}만큼 데미지를 받았습니다. " +
+                Console.WriteLine($"Lv.{level} [{name}]의 방어! [방어력: {defense}]");
+                Console.WriteLine($"Lv.{level} [{name}]이(가) {trueDamage}만큼 데미지를 받았습니다. " +
                     $"HP {curHealthPoint} -> {_takeDamageHealthPoint}");
-                Console.WriteLine();
+
             }
             curHealthPoint = _takeDamageHealthPoint;
         }
 
         public void AttackOpponent(Character opponent, int damage)
         {
-            Console.WriteLine($"{name}의 공격!");
-            Console.WriteLine($"{opponent.name}을(를) 공격했습니다. [데미지: {damage}]");
+            Console.WriteLine($"[{name}]의 공격!");
+            Console.WriteLine($"[{opponent.name}]을(를) 공격했습니다. [데미지: {damage}]");
             Console.WriteLine();
             opponent.TakeDamage(damage);
+            if (opponent.isDead)
+            {
+                opponent.OnDie();
+                if (this is Player) { 
+                    
+                    Program.player.GetExp(opponent.experience);
+                    Program.player.GetGold(opponent.gold);
+                    Console.WriteLine();
+                    Program.player.CheckLevel();
+                }
+            }
         }
 
         public virtual void PrintCharacterInfo()    
@@ -89,7 +101,38 @@ namespace Roronoa_TXT_RPG
                 Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
             }
         }
-	}
+
+        public virtual void PrintCharacterInfo(int beforeBattlePlayerHealthPoint, int beforeBattlePlayerLevel)
+        {
+            if (curHealthPoint > 0)
+            {
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"Lv {beforeBattlePlayerLevel}-> {level}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
+            }
+            else
+            {
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
+            }
+        }
+
+        public virtual void PrintCharacterInfo(int beforeBattlePlayerHealthPoint, int beforeBattlePlayerLevel, int beforeBattlePlayerGold)
+        {
+            if (curHealthPoint > 0)
+            {
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"Lv {beforeBattlePlayerLevel}-> {level}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> {curHealthPoint}");
+                Console.WriteLine($"Gold {beforeBattlePlayerGold}-> {gold}");
+            }
+            else
+            {
+                Console.WriteLine($"Lv.{level} {name}");
+                Console.WriteLine($"HP {beforeBattlePlayerHealthPoint}-> Dead");
+            }
+        }
+    }
     
 }
 
