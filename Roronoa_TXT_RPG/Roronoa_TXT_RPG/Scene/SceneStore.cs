@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Roronoa_TXT_RPG
 {
-    internal class SceneStatus : Scene
+    internal class SceneStore : Scene
     {
-        Queue<int> selectQueue = new Queue<int>();
-        public SceneStatus()
+        public SceneStore()
         {
         }
-
         public override void SceneUpdate()
         {
-            Program.player.DisplayStatusAndItemInfo();
+            
+            ItemManager.instance?.PrintStore();
+
         }
     }
 }
