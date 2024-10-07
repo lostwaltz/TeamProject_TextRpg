@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text;
 
-public enum STORE_ACTION_TYPE { GOLOBY, PURCHASE, SELL, WATCH }
+public enum STORE_ACTION_TYPE { GO_LOBY, PURCHASE, SELL, WATCH }
 namespace Roronoa_TXT_RPG
 {
     internal class ItemManager
@@ -104,7 +104,7 @@ namespace Roronoa_TXT_RPG
                         case STORE_ACTION_TYPE.SELL:
                             storeActionType = STORE_ACTION_TYPE.SELL;
                             break;
-                        case STORE_ACTION_TYPE.GOLOBY:
+                        case STORE_ACTION_TYPE.GO_LOBY:
                             SceneManager.instance?.SceneChange(SCENE_TYPE.SCENE_LOBY);
                             break;
                     }
